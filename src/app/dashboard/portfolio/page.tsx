@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { formatCurrency, formatPercent } from '@/lib/utils'
 import { ASSET_CLASSES } from '@/lib/types'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import Link from 'next/link'
 
 const HOLDINGS = [
   { symbol: 'RELIANCE', name: 'Reliance Industries', qty: 50, avgPrice: 2840, cmp: 3110, asset: 'stocks', xirr: 18.2, change1d: 1.8 },
@@ -25,6 +26,7 @@ const PERF_HISTORY = [
 export default function PortfolioPage() {
   const [filter, setFilter] = useState<string>('all')
   const [sort, setSort] = useState<string>('value')
+  const hasData = HOLDINGS.length > 0
 
   const filtered = HOLDINGS.filter(h => filter === 'all' || h.asset === filter)
   const sorted = [...filtered].sort((a, b) => {
@@ -38,14 +40,34 @@ export default function PortfolioPage() {
   const totalInvested = HOLDINGS.reduce((s, h) => s + h.qty * h.avgPrice, 0)
   const totalGain = totalValue - totalInvested
 
+  if (!hasData) return (
+    <div>
+      <div className="mb-6">
+        <h1 className="text-xl md:text-2xl font-black text-slate-900">Portfolio</h1>
+        <p className="text-slate-400 text-sm mt-0.5">All your holdings in one place</p>
+      </div>
+      <div className="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-slate-200">
+        <div className="text-5xl mb-4">📊</div>
+        <h3 className="text-lg font-bold text-slate-800 mb-2">No holdings yet</h3>
+        <p className="text-slate-400 text-sm mb-6 max-w-xs mx-auto">
+          Import your broker statement, CAMS PDF, or manually add investments to see your portfolio here.
+        </p>
+        <Link href="/dashboard/import"
+          className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-500 transition inline-block">
+          Add investments →
+        </Link>
+      </div>
+    </div>
+  )
+
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-black text-slate-900">Portfolio</h1>
+        <h1 className="text-xl md:text-2xl font-black text-slate-900">Portfolio</h1>
         <p className="text-slate-400 text-sm mt-0.5">All holdings · Updated today at market close</p>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-slate-900 text-white rounded-xl p-4">
           <div className="text-xs text-white/40 uppercase tracking-wide mb-1">Portfolio Value</div>
           <div className="text-2xl font-black">{formatCurrency(totalValue, true)}</div>
