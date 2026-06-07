@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artha — PRD v3.0 (Full Detail)</title>
+<style>
+:root{--p:#1a1a2e;--a:#4f46e5;--al:#818cf8;--s:#059669;--w:#d97706;--d:#dc2626;--bg:#f8fafc;--card:#fff;--b:#e2e8f0;--t:#1e293b;--tm:#64748b;--tl:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.6}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--p);color:#fff;padding:2rem 0;position:fixed;height:100vh;overflow-y:auto;z-index:100}
+.main{margin-left:260px;padding:2rem 3rem;max-width:1100px}
+.sidebar-logo{padding:0 1.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-logo h2{font-size:1.2rem;font-weight:700;color:var(--al)}
+.sidebar-logo span{font-size:.7rem;color:rgba(255,255,255,.4)}
+.sidebar-nav{padding:1rem 0}
+.sn-sec{padding:.4rem 1.5rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.75rem}
+.sn-link{display:block;padding:.4rem 1.5rem;font-size:.8rem;color:rgba(255,255,255,.65);text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.sn-link:hover{color:#fff;background:rgba(255,255,255,.05);border-left-color:var(--al)}
+h1{font-size:2.5rem;font-weight:800;color:var(--p);line-height:1.2}
+h2{font-size:1.6rem;font-weight:700;color:var(--p);margin:2.5rem 0 1rem;padding-top:1rem;border-top:2px solid var(--b)}
+h3{font-size:1.15rem;font-weight:600;color:var(--p);margin:1.5rem 0 .6rem}
+h4{font-size:.95rem;font-weight:600;color:var(--t);margin:1rem 0 .4rem}
+p{margin-bottom:.7rem;color:var(--t)}
+ul,ol{margin:.4rem 0 .9rem 1.4rem}
+li{margin-bottom:.25rem;font-size:.9rem}
+strong{color:var(--p)}
+code{background:#f1f5f9;padding:.1em .35em;border-radius:4px;font-family:monospace;font-size:.83em;color:var(--a)}
+pre{background:#0f172a;color:#e2e8f0;padding:1.2rem;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.7;margin:1rem 0}
+pre code{background:none;color:inherit;padding:0}
+/* Cover */
+.cover{background:linear-gradient(135deg,var(--p) 0%,#2d1b69 50%,#1a1a2e 100%);color:#fff;padding:3rem;border-radius:16px;margin-bottom:2.5rem;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(79,70,229,.3) 0%,transparent 70%)}
+.cover-tag{display:inline-block;background:rgba(255,255,255,.15);padding:.25rem .75rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.05em;margin-bottom:.75rem}
+.cover h1{color:#fff;font-size:2.8rem}
+.cover-sub{font-size:1.1rem;color:rgba(255,255,255,.7);margin:.4rem 0 1.5rem}
+.cover-meta{display:flex;gap:2rem;flex-wrap:wrap}
+.cm-item .label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4)}
+.cm-item .value{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.9)}
+/* Cards / Grid */
+.card{background:var(--card);border:1px solid var(--b);border-radius:12px;padding:1.4rem;margin:.8rem 0}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+.card-grid .card{margin:0}
+/* Callouts */
+.callout{border-radius:10px;padding:1.1rem 1.4rem;margin:1.1rem 0;border-left:4px solid}
+.callout h4{margin-top:0}
+.cv{background:#ede9fe;border-color:var(--a)}.cv h4{color:#4c1d95}
+.cw{background:#fffbeb;border-color:var(--w)}.cw h4{color:#92400e}
+.cs{background:#ecfdf5;border-color:var(--s)}.cs h4{color:#064e3b}
+.ci{background:#eff6ff;border-color:#3b82f6}.ci h4{color:#1e3a8a}
+/* Phase badges */
+.pb{display:inline-flex;align-items:center;padding:.25rem .7rem;border-radius:20px;font-size:.72rem;font-weight:700}
+.p0{background:#ede9fe;color:#7c3aed}.p1{background:#dbeafe;color:#2563eb}.p2{background:#d1fae5;color:#059669}
+.p3{background:#fef3c7;color:#d97706}.p4{background:#fee2e2;color:#dc2626}.p5{background:#ccfbf1;color:#0f766e}
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.83rem}
+.tbl th{background:var(--p);color:#fff;padding:.6rem .9rem;text-align:left;font-weight:600}
+.tbl th:first-child{border-radius:6px 0 0 0}.tbl th:last-child{border-radius:0 6px 0 0}
+.tbl td{padding:.55rem .9rem;border-bottom:1px solid var(--b);vertical-align:top}
+.tbl tr:hover td{background:#f8fafc}
+.tbl .yes{color:var(--s);font-weight:700}.tbl .no{color:var(--d)}.tbl .partial{color:var(--w);font-weight:600}
+.tbl .hl{background:#ede9fe!important;font-weight:700}
+/* Wireframe */
+.wf{background:#f8fafc;border:2px dashed var(--b);border-radius:12px;padding:1.5rem;margin:1.2rem 0;font-size:.82rem}
+.wf-bar{background:var(--p);color:#fff;padding:.5rem 1rem;border-radius:8px 8px 0 0;font-size:.75rem;font-weight:600;margin:-1.5rem -1.5rem 1rem;display:flex;align-items:center;gap:1rem}
+.wf-bar span{background:rgba(255,255,255,.15);padding:.15rem .5rem;border-radius:4px;font-size:.68rem}
+.wf-row{display:flex;gap:1rem;margin:.6rem 0}
+.wf-box{background:#fff;border:1px solid var(--b);border-radius:8px;padding:.75rem;flex:1;min-height:60px}
+.wf-box.accent{background:#ede9fe;border-color:var(--al)}
+.wf-box.dark{background:var(--p);color:#fff;border-color:var(--p)}
+.wf-box .wf-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tl);margin-bottom:.25rem}
+.wf-box .wf-val{font-size:1.2rem;font-weight:800;color:var(--p)}
+.wf-box.accent .wf-val{color:var(--a)}
+.wf-box.dark .wf-val{color:#fff}
+.wf-nav{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.wf-nav-item{padding:.3rem .8rem;background:#fff;border:1px solid var(--b);border-radius:20px;font-size:.75rem;cursor:pointer}
+.wf-nav-item.active{background:var(--a);color:#fff;border-color:var(--a)}
+.wf-table-row{display:flex;align-items:center;padding:.4rem .6rem;background:#fff;border:1px solid var(--b);border-radius:6px;margin:.3rem 0;gap:.75rem;font-size:.8rem}
+.wf-table-row .wf-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.wf-chart{background:#fff;border:1px solid var(--b);border-radius:8px;padding:.75rem;height:80px;display:flex;align-items:flex-end;gap:3px}
+.wf-bar-item{background:var(--al);border-radius:3px 3px 0 0;flex:1}
+.wf-form{background:#fff;border:1px solid var(--b);border-radius:8px;padding:.75rem}
+.wf-input{background:#f8fafc;border:1px solid var(--b);border-radius:6px;padding:.4rem .6rem;font-size:.75rem;width:100%;margin:.3rem 0;color:var(--tm)}
+.wf-btn{background:var(--a);color:#fff;border:none;border-radius:6px;padding:.4rem 1rem;font-size:.75rem;font-weight:600;cursor:pointer;margin-top:.5rem}
+.wf-btn.sec{background:#f1f5f9;color:var(--t);border:1px solid var(--b)}
+/* User stories */
+.story{background:var(--card);border:1px solid var(--b);border-radius:8px;padding:1rem 1.2rem;margin:.6rem 0;border-left:4px solid var(--a)}
+.story .as{font-size:.75rem;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+.story .want{font-weight:600;color:var(--p);margin-bottom:.2rem}
+.story .so{font-size:.83rem;color:var(--tm);font-style:italic}
+.story .ac{margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--b)}
+.story .ac-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--tl);margin-bottom:.3rem}
+.story .ac ul{margin:.2rem 0 0 1.2rem}
+.story .ac li{font-size:.8rem;color:var(--tm)}
+/* API */
+.endpoint{background:var(--card);border:1px solid var(--b);border-radius:8px;margin:.6rem 0;overflow:hidden}
+.ep-head{display:flex;align-items:center;gap:.75rem;padding:.6rem 1rem;background:#f8fafc;border-bottom:1px solid var(--b)}
+.ep-method{padding:.2rem .6rem;border-radius:4px;font-size:.72rem;font-weight:800;letter-spacing:.05em}
+.get{background:#dbeafe;color:#1d4ed8}.post{background:#d1fae5;color:#065f46}
+.put{background:#fef3c7;color:#92400e}.del{background:#fee2e2;color:#991b1b}
+.ep-path{font-family:monospace;font-size:.85rem;font-weight:600;color:var(--p)}
+.ep-desc{font-size:.8rem;color:var(--tm);margin-left:auto}
+.ep-body{padding:.75rem 1rem;font-size:.8rem}
+.ep-body table{width:100%;border-collapse:collapse;font-size:.78rem}
+.ep-body th{background:#f1f5f9;padding:.35rem .6rem;text-align:left;font-size:.72rem;font-weight:600}
+.ep-body td{padding:.35rem .6rem;border-bottom:1px solid var(--b)}
+/* Dict */
+.dict-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:.5rem 0}
+.dict-tbl th{background:#1e293b;color:#94a3b8;padding:.45rem .75rem;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em}
+.dict-tbl td{padding:.45rem .75rem;border-bottom:1px solid var(--b);font-family:monospace;font-size:.78rem}
+.dict-tbl .field{color:var(--w);font-weight:700}
+.dict-tbl .type{color:var(--a)}
+.dict-tbl .desc{font-family:inherit;color:var(--tm)}
+/* Pricing */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:1.2rem 0}
+.price-card{border:2px solid var(--b);border-radius:12px;padding:1.5rem;text-align:center}
+.price-card.featured{border-color:var(--a);position:relative}
+.price-card.featured::before{content:'RECOMMENDED';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--a);color:#fff;padding:.15rem .7rem;border-radius:20px;font-size:.62rem;font-weight:700;letter-spacing:.1em}
+.price-amt{font-size:2rem;font-weight:800;color:var(--p)}
+.price-amt span{font-size:.9rem;font-weight:400;color:var(--tm)}
+.price-card ul{text-align:left;margin:.8rem 0 0;font-size:.82rem}
+.price-card li{padding:.25rem 0;border-bottom:1px solid var(--b)}
+/* Misc */
+.snum{color:var(--a);font-size:.9rem;margin-right:.4rem}
+.tag{display:inline-block;background:#f1f5f9;padding:.15rem .55rem;border-radius:20px;font-size:.72rem;color:var(--tm);margin:.15rem}
+.phase-row{border-radius:10px;padding:1.5rem;margin:1.2rem 0;border:2px solid}
+.pr0{border-color:#7c3aed;background:#faf5ff}.pr1{border-color:#2563eb;background:#eff6ff}
+.pr2{border-color:#059669;background:#f0fdf4}.pr3{border-color:#d97706;background:#fffbeb}
+.pr4{border-color:#dc2626;background:#fff1f2}.pr5{border-color:#0f766e;background:#f0fdfa}
+.pr-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+hr{border:none;border-top:2px solid var(--b);margin:2rem 0}
+.toc{background:var(--card);border:1px solid var(--b);border-radius:10px;padding:1.2rem 1.8rem;margin-bottom:2rem}
+.toc h3{margin-top:0;color:var(--tm);font-size:.82rem;text-transform:uppercase;letter-spacing:.1em}
+.toc ol{margin:.4rem 0 0;column-count:2;column-gap:2rem}
+.toc li{padding:.2rem 0;font-size:.85rem}
+.toc a{color:var(--a);text-decoration:none}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1rem 0}
+.metric-c{text-align:center;padding:1rem;background:var(--card);border:1px solid var(--b);border-radius:10px}
+.metric-c .num{font-size:1.8rem;font-weight:800;color:var(--a)}
+.metric-c .lbl{font-size:.75rem;color:var(--tm);margin-top:.2rem}
+.schema-wrap{background:#0f172a;border-radius:10px;padding:1.2rem;overflow-x:auto;margin:.8rem 0}
+.schema-wrap pre{background:none;padding:0;margin:0;color:#e2e8f0;font-size:.78rem}
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0;padding:1.2rem}.price-grid,.toc ol{grid-template-columns:1fr;column-count:1}}
+@media print{.sidebar{display:none}.main{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="layout">
+<div class="sidebar">
+<div class="sidebar-logo"><h2>Artha</h2><span>PRD v2.0 — Confidential</span></div>
+<nav class="sidebar-nav">
+<div class="sn-sec">Overview</div>
+<a class="sn-link" href="#s1">1. Executive Summary</a>
+<a class="sn-link" href="#s2">2. Problem Statement</a>
+<a class="sn-link" href="#s3">3. Market &amp; Competition</a>
+<a class="sn-link" href="#s4">4. Vision &amp; USP</a>
+<a class="sn-link" href="#s5">5. User Personas</a>
+<a class="sn-link" href="#s6">6. User Journey Maps</a>
+<div class="sn-sec">Product</div>
+<a class="sn-link" href="#s7">7. Wireframes</a>
+<a class="sn-link" href="#s8">8. Asset Classes</a>
+<a class="sn-link" href="#s9">9. Feature Spec</a>
+<a class="sn-link" href="#s10">10. User Stories</a>
+<a class="sn-link" href="#s11">11. Screen Inventory</a>
+<a class="sn-link" href="#s12">12. Metrics Engine</a>
+<div class="sn-sec">Build</div>
+<a class="sn-link" href="#s13">13. Phase Roadmap</a>
+<a class="sn-link" href="#s14">14. MVP Spec</a>
+<a class="sn-link" href="#s15">15. Tech Architecture</a>
+<a class="sn-link" href="#s16">16. Database Schema</a>
+<a class="sn-link" href="#s17">17. Data Dictionary</a>
+<a class="sn-link" href="#s18">18. API Specification</a>
+<a class="sn-link" href="#s19">19. Integration Specs</a>
+<a class="sn-link" href="#s20">20. Error Handling</a>
+<div class="sn-sec">Business</div>
+<a class="sn-link" href="#s21">21. Performance Req.</a>
+<a class="sn-link" href="#s22">22. Legal &amp; Compliance</a>
+<a class="sn-link" href="#s23">23. Testing Strategy</a>
+<a class="sn-link" href="#s24">24. Monetization</a>
+<a class="sn-link" href="#s25">25. KPIs</a>
+<a class="sn-link" href="#s26">26. Go-to-Market</a>
+<a class="sn-link" href="#s27">27. Financial Model</a>
+<a class="sn-link" href="#s28">28. Risks</a>
+</nav>
+</div>
+<div class="main">
+<!-- COVER -->
+<div class="cover">
+<div class="cover-tag">PRODUCT REQUIREMENTS DOCUMENT — v2.0 FULL DETAIL</div>
+<h1>Artha</h1>
+<div class="cover-sub">India's first conflict-free Total Wealth OS — track every rupee, benchmark every asset, understand every return.</div>
+<div class="cover-meta">
+<div class="cm-item"><div class="label">Version</div><div class="value">2.0 — Full Detail</div></div>
+<div class="cm-item"><div class="label">Date</div><div class="value">June 2026</div></div>
+<div class="cm-item"><div class="label">Author</div><div class="value">Medha Trivedi</div></div>
+<div class="cm-item"><div class="label">Status</div><div class="value">MVP Build-Ready</div></div>
+<div class="cm-item"><div class="label">Sections</div><div class="value">28 sections, 9 asset classes</div></div>
+</div></div>
+
+<!-- TOC -->
+<div class="toc"><h3>Table of Contents</h3>
+<ol>
+<li><a href="#s1">Executive Summary</a></li>
+<li><a href="#s2">Problem Statement</a></li>
+<li><a href="#s3">Market &amp; Competition</a></li>
+<li><a href="#s4">Vision &amp; USP</a></li>
+<li><a href="#s5">User Personas</a></li>
+<li><a href="#s6">User Journey Maps</a></li>
+<li><a href="#s7">Wireframes</a></li>
+<li><a href="#s8">Asset Classes</a></li>
+<li><a href="#s9">Feature Specification</a></li>
+<li><a href="#s10">User Stories</a></li>
+<li><a href="#s11">Screen Inventory</a></li>
+<li><a href="#s12">Metrics Engine</a></li>
+<li><a href="#s13">Phase Roadmap</a></li>
+<li><a href="#s14">MVP Specification</a></li>
+<li><a href="#s15">Tech Architecture</a></li>
+<li><a href="#s16">Database Schema</a></li>
+<li><a href="#s17">Data Dictionary</a></li>
+<li><a href="#s18">API Specification</a></li>
+<li><a href="#s19">Integration Specs</a></li>
+<li><a href="#s20">Error Handling Matrix</a></li>
+<li><a href="#s21">Performance Requirements</a></li>
+<li><a href="#s22">Legal &amp; Compliance</a></li>
+<li><a href="#s23">Testing Strategy</a></li>
+<li><a href="#s24">Monetization</a></li>
+<li><a href="#s25">KPIs &amp; Success Metrics</a></li>
+<li><a href="#s26">Go-to-Market</a></li>
+<li><a href="#s27">Financial Model</a></li>
+<li><a href="#s28">Risks &amp; Mitigation</a></li>
+</ol></div>
+
+<!-- S1 -->
+<h2 id="s1"><span class="snum">01</span> Executive Summary</h2>
+<p>Artha is India's first <strong>Personal Finance Operating System</strong> — a freemium, subscription-funded platform that evolves from wealth tracking into a complete financial life command centre. Phase by phase, it gives Indian investors: (1) a consolidated view of all their wealth, (2) institutional-grade analytics, (3) goal-based planning, (4) on-demand research concierge, and (5) access to curated financial products — all without conflicted advice or distribution commissions.</p>
+<p><strong>The starting point (MVP):</strong> Track all 9 major Indian asset classes — direct equity, mutual funds, EPF, PPF, SSY, NPS, ULIP, PMS, and fixed deposits — with zero-friction brokerage statement imports (7 brokers, auto-format recognition), XIRR/TWRR with institutional-grade methodology, benchmark comparison, and AI commentary.</p>
+<p><strong>The destination:</strong> An investment concierge for the AI era. Users can tag investments to life goals, get retirement corpus projections, commission institutional-grade stock research reports (concall analysis, forensic, valuation) at a fraction of brokerage cost, and access curated financial products — on a platform that is structurally conflict-free by design.</p>
+<p><strong>The structural moat:</strong> Revenue from subscriptions + research fees. Zero distribution commissions. Every recommendation on Artha is structurally incapable of being biased. This is the rarest thing in Indian fintech: honest, conflict-free financial intelligence.</p>
+<div class="metrics-row">
+<div class="metric-c"><div class="num">9</div><div class="lbl">Asset classes (complete)</div></div>
+<div class="metric-c"><div class="num">7</div><div class="lbl">Brokers with auto-import</div></div>
+<div class="metric-c"><div class="num">₹0</div><div class="lbl">Commission earned ever</div></div>
+<div class="metric-c"><div class="num">5</div><div class="lbl">Research report types</div></div>
+</div>
+
+<!-- S2 -->
+<h2 id="s2"><span class="snum">02</span> Problem Statement</h2>
+<p>An Indian investor with a typical HNI portfolio manages 6–9 separate portals daily. Even with all portals open simultaneously, they cannot compute a single honest answer to:</p>
+<div class="callout cv"><h4>"What is my true net worth today, and how is every rupee actually performing?"</h4><p>This question is structurally unsolvable with today's fragmented tools.</p></div>
+<h3>The 7 Core Pains</h3>
+<div class="card-grid">
+<div class="card"><strong>1. Fragmentation</strong><br><span style="font-size:.84rem;color:var(--tm)">6–9 portals for a complete picture. Zerodha for stocks, AMFI/Kuvera for MF, EPFO portal for EPF, NPS CRA for NPS, insurer site for ULIP, PMS manager for PMS, bank app for FD. Investors give up checking.</span></div>
+<div class="card"><strong>2. No true net worth</strong><br><span style="font-size:.84rem;color:var(--tm)">Investable assets ≠ net worth. EPF, PPF, SSY (often ₹30–70L combined for a 40-year-old) are almost never in the same view as stocks and MF.</span></div>
+<div class="card"><strong>3. Incomparable returns</strong><br><span style="font-size:.84rem;color:var(--tm)">MF shows XIRR. EPF shows "8.25% declared." PMS shows "35% absolute since inception." These are not comparable. No app solves this.</span></div>
+<div class="card"><strong>4. PMS &amp; ULIP blindspot</strong><br><span style="font-size:.84rem;color:var(--tm)">₹5L+ crore combined AUM. Zero consumer analytics tools. ULIP investors don't know their true return after charges. PMS investors don't know if they're beating the index net of fees.</span></div>
+<div class="card"><strong>5. Conflicted advice</strong><br><span style="font-size:.84rem;color:var(--tm)">INDmoney, ET Money, Groww earn 0.5–1% on product distribution. Their "best fund" recommendations are structurally biased. No honest, conflict-free intelligence tool exists.</span></div>
+<div class="card"><strong>6. No tax intelligence</strong><br><span style="font-size:.84rem;color:var(--tm)">LTCG threshold ₹1.25L. Most investors discover their tax liability only in March/April. Tax harvesting opportunities (save ₹10K–2L/year) are routinely missed.</span></div>
+<div class="card"><strong>7. No AI commentary</strong><br><span style="font-size:.84rem;color:var(--tm)">Raw numbers with zero interpretation. "Your PMS has underperformed Nifty500 by 4% over 3 years" is a sentence no Indian wealth app has ever sent to a user.</span></div>
+</div>
+
+<!-- S3 -->
+<h2 id="s3"><span class="snum">03</span> Market Research &amp; Competitive Landscape</h2>
+<h3>Key Competitors</h3>
+<div class="card"><h4>INDmoney (Series D — most funded competitor)</h4><p>Founded 2019, Ashish Kashyap (Ibibo/GoIbibo). Covers stocks, MF, US stocks, EPF (via EPFO credential sharing — security concern), NPS, credit cards. Uses Account Aggregator for bank data. Has evolved into a full broker/investing platform.</p><p><strong>Weaknesses:</strong> Revenue entirely from commissions (conflicted). No PMS/ULIP tracking. UI cluttered with product promotions. Analytics lack depth — no TWRR, no benchmark analysis, no AI commentary. EPFO requires sharing credentials (users uncomfortable). Recommended products = highest commission products.</p></div>
+<div class="card"><h4>ET Money (Times Group)</h4><p>Strong MF tracking + NPS. Launched "Genius Plan" ₹299/mo — first premium wealth tracker in India. Good XIRR for MF portfolios. Clean UI.</p><p><strong>Weaknesses:</strong> Stock portfolio manual entry only. No PMS/ULIP/SSY tracking. Cross-asset benchmarking absent. Revenue still from MF distribution. Genius features feel thin for ₹299/mo price point.</p></div>
+<div class="card"><h4>Kuvera</h4><p>Best-in-class MF analytics. Direct plans only (no commission). Strong tax harvesting feature. Good XIRR reporting. Loyal user base among serious MF investors.</p><p><strong>Weaknesses:</strong> Only MF. Not a wealth tracker. No stocks, EPF, NPS, ULIP, PMS. A category winner in a deliberately narrow category. Cannot show net worth.</p></div>
+<div class="card"><h4>Safebox</h4><p>Positioned as "India's most complete net worth tracker." Tracks MF, property, gold, FDs, bank accounts, insurance. SEBI registered. Family-focused.</p><p><strong>Weaknesses:</strong> No PMS/NPS/ULIP/EPF tracking. Property valuation is manual/estimated. No IRR/TWRR computation. Limited analytics. New product — ecosystem is immature.</p></div>
+<h3>Feature Gap Matrix</h3>
+<div style="overflow-x:auto">
+<table class="tbl">
+<thead><tr><th>Feature</th><th>INDmoney</th><th>ET Money</th><th>Kuvera</th><th>Safebox</th><th class="hl">Artha</th></tr></thead>
+<tbody>
+<tr><td><strong>Stocks</strong></td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="partial">~Manual</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Mutual Funds</strong></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>EPF</strong></td><td class="partial">~Credential</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>PPF</strong></td><td class="partial">~Manual</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>SSY</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>NPS</strong></td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>ULIP</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>PMS</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Fixed Deposits</strong></td><td class="partial">~Manual</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Bank Accounts</strong></td><td class="yes">✓ AA</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes hl">✓ (PDF→AA)</td></tr>
+<tr><td><strong>XIRR all assets</strong></td><td class="no">✗</td><td class="partial">~MF only</td><td class="yes">✓ MF</td><td class="no">✗</td><td class="yes hl">✓ All</td></tr>
+<tr><td><strong>TWRR</strong></td><td class="no">✗</td><td class="no">✗</td><td class="partial">~MF only</td><td class="no">✗</td><td class="yes hl">✓ All</td></tr>
+<tr><td><strong>AI Commentary</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Tax Cockpit</strong></td><td class="partial">~Basic</td><td class="partial">~MF</td><td class="yes">✓ MF</td><td class="no">✗</td><td class="yes hl">✓ All assets</td></tr>
+<tr><td><strong>PMS Fee Drag</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>ULIP True XIRR</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Conflict-free</strong></td><td class="no">✗</td><td class="partial">~Partial</td><td class="yes">✓</td><td class="no">✗</td><td class="yes hl">✓ Always</td></tr>
+<tr><td><strong>7-broker Auto-Import</strong></td><td class="partial">~1 broker</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓ 7 brokers</td></tr>
+<tr><td><strong>Goal Planning + Tagging</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓</td></tr>
+<tr><td><strong>Research Concierge</strong></td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes hl">✓ 5 report types</td></tr>
+</tbody></table></div>
+<div class="callout cs"><h4>Whitespace: Owned entirely by Artha</h4><p>PMS analytics + ULIP true XIRR + SSY + complete cross-asset XIRR/TWRR + AI commentary — no competitor touches all five simultaneously. This is not a feature gap; it's a market gap.</p></div>
+
+<!-- S4 -->
+<h2 id="s4"><span class="snum">04</span> Product Vision &amp; USP</h2>
+<div class="callout cv"><h4 style="font-size:1.1rem">"Your financial concierge for the AI era. Know your true wealth. Plan for every goal. Invest with institutional intelligence — without anyone trying to sell you something."</h4></div>
+
+<h3>The Vision: Personal Finance OS</h3>
+<p>Artha is not just a tracker. It is the operating system for an Indian investor's financial life — evolving in phases from a wealth dashboard to a full financial command centre. The analogy: Bloomberg Terminal for Indian retail investors, at 1% of the cost, without the conflict of interest.</p>
+
+<div class="card" style="border-left:4px solid var(--a);margin-bottom:1rem">
+<strong>Phase 0–1: Know (Wealth Intelligence)</strong> — Consolidated net worth across all 9 asset classes. Zero-friction imports from 7 brokers. XIRR/TWRR/benchmark. AI commentary. Tax cockpit. Deep stock &amp; MF analytics with 1D returns, momentum signals, rolling performance, normalised comparison charts.
+</div>
+<div class="card" style="border-left:4px solid var(--s);margin-bottom:1rem">
+<strong>Phase 2–3: Plan (Goal OS)</strong> — Define life goals (retirement, child education, home, vacation, emergency corpus). Tag existing investments to goals. See if each goal is on track. AI-generated gap analysis: "You need ₹2.1 Cr more for retirement — here's a monthly SIP plan to bridge it." Retirement corpus planner with inflation-adjusted projections.
+</div>
+<div class="card" style="border-left:4px solid var(--w);margin-bottom:1rem">
+<strong>Phase 3–4: Research (Investment Concierge)</strong> — On-demand institutional-grade research reports for stocks. Concall analysis, management credibility audit, forensic financial analysis, reverse DCF valuation, comprehensive research report. User places a request → makes a payment → receives a PDF report permanently saved to their account. This is their concierge for intelligent investing.
+</div>
+<div class="card" style="border-left:4px solid var(--d);margin-bottom:1rem">
+<strong>Phase 5: Marketplace (Curated Products)</strong> — Artha-curated, conflict-screened financial products. Not commission-driven promotion — a hand-picked shelf of instruments that pass Artha's quality bar. Revenue from flat referral fees, not % AUM commissions. Trust-preserving monetisation.
+</div>
+
+<h3>8 Core USPs</h3>
+<div class="card-grid">
+<div class="card" style="border-top:4px solid var(--a)"><strong>1. True Total Wealth OS</strong><br><span style="font-size:.84rem;color:var(--tm)">All 9 Indian asset classes. Zero exceptions. EPF + PPF + SSY + NPS + ULIP + PMS + Stocks + MF + FD. One honest number.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>2. Zero-Friction Import</strong><br><span style="font-size:.84rem;color:var(--tm)">7 brokerage formats auto-recognised. Upload multiple files — duplicates removed automatically. Stocks and MF ready in seconds, not hours.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>3. Institutional Analytics</strong><br><span style="font-size:.84rem;color:var(--tm)">XIRR, TWRR, 1D P&amp;L, rolling returns, benchmark normalisation, momentum signals, contribution attribution — same depth as a professional portfolio management system.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>4. Goal Intelligence</strong><br><span style="font-size:.84rem;color:var(--tm)">Tag investments to life goals. Real-time goal progress. AI corpus projections. "You are ₹82L short of your retirement goal — here's what to do." No Indian app does this end-to-end.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>5. Research Concierge</strong><br><span style="font-size:.84rem;color:var(--tm)">Institutional stock research on demand. Forensic, valuation, concall, management credibility — at ₹499–₹1,999/report. Permanently yours. No analyst conflicts.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>6. Conflict-Free by Design</strong><br><span style="font-size:.84rem;color:var(--tm)">Subscriptions + research fees only. Zero distribution commissions. Structurally incapable of biased advice — not just by policy.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>7. AI Commentary</strong><br><span style="font-size:.84rem;color:var(--tm)">Weekly: "Your PMS earned 9.2% vs Nifty500 14.1% — ₹2.1L fee drag for negative alpha. Is active management worth it?" No Indian app sends this message.</span></div>
+<div class="card" style="border-top:4px solid var(--a)"><strong>8. PMS &amp; ULIP Truth</strong><br><span style="font-size:.84rem;color:var(--tm)">True XIRR on ULIP after all charges. PMS fee drain vs alpha. "Your ULIP breaks even in year 9." The honest analysis your agent won't give — because they earned commission on the sale.</span></div>
+</div>
+
+<!-- S5 -->
+<h2 id="s5"><span class="snum">05</span> User Personas</h2>
+<div class="card-grid">
+<div class="card">
+<div style="font-weight:700;font-size:1.05rem;color:var(--p);margin-bottom:.25rem">The Serious Saver</div>
+<div style="font-size:.8rem;color:var(--tm);margin-bottom:.75rem">35–50 years · Investable: ₹25L–₹5 Cr · Primary target</div>
+<span class="tag">Stocks via Zerodha</span><span class="tag">MF SIPs</span><span class="tag">EPF</span><span class="tag">NPS</span><span class="tag">PMS ₹50L+</span>
+<p style="font-size:.84rem;margin:.75rem 0 0">Has 5–8 investment accounts. Checks portfolio weekly. Pays for quality tools. Confused about true PMS return vs MF. Has a CA who provides quarterly data — wants live view in between.</p>
+<div class="callout cw" style="margin-top:.75rem;padding:.6rem .9rem"><em style="font-size:.82rem">"I have no idea if my PMS manager is actually earning his 2% fee."</em></div>
+<ul style="font-size:.82rem;margin-top:.75rem">
+<li><strong>Goals:</strong> Consolidated view, honest benchmarking, CA-shareable reports</li>
+<li><strong>Willingness to pay:</strong> High — already pays ₹2,000+/month in PMS fees</li>
+<li><strong>Acquisition:</strong> LinkedIn, CA referral, PMS provider co-marketing</li>
+</ul>
+</div>
+<div class="card">
+<div style="font-weight:700;font-size:1.05rem;color:var(--p);margin-bottom:.25rem">The DIY Analyst</div>
+<div style="font-size:.8rem;color:var(--tm);margin-bottom:.75rem">25–38 years · Investable: ₹5L–₹50L · Volume target</div>
+<span class="tag">Heavy stocks</span><span class="tag">SIPs</span><span class="tag">EPF</span><span class="tag">Tax harvesting</span><span class="tag">Spreadsheets</span>
+<p style="font-size:.84rem;margin:.75rem 0 0">Spreadsheet power user today. Very data-driven, tracks everything in Excel. Wants benchmark comparison, XIRR, rolling returns. Would love to ditch the spreadsheet. Active on r/IndiaInvestments.</p>
+<div class="callout cw" style="margin-top:.75rem;padding:.6rem .9rem"><em style="font-size:.82rem">"I spend 90 minutes every quarter updating my Excel portfolio tracker."</em></div>
+<ul style="font-size:.82rem;margin-top:.75rem">
+<li><strong>Goals:</strong> Replace spreadsheet, XIRR/TWRR, tax cockpit</li>
+<li><strong>Willingness to pay:</strong> Medium — expects value before paying</li>
+<li><strong>Acquisition:</strong> Reddit, ProductHunt, Twitter/X</li>
+</ul>
+</div>
+<div class="card">
+<div style="font-weight:700;font-size:1.05rem;color:var(--p);margin-bottom:.25rem">The HNI Delegator</div>
+<div style="font-size:.8rem;color:var(--tm);margin-bottom:.75rem">45–65 years · Investable: ₹1 Cr+ · High LTV</div>
+<span class="tag">Multiple PMS</span><span class="tag">ULIP</span><span class="tag">FDs</span><span class="tag">Family wealth</span><span class="tag">CA-managed</span>
+<p style="font-size:.84rem;margin:.75rem 0 0">Multiple PMS, ULIPs bought via agents, FDs across 3 banks, MF via distributor. Has CA and wealth manager. Gets data quarterly. Wants a live dashboard between advisor meetings.</p>
+<div class="callout cw" style="margin-top:.75rem;padding:.6rem .9rem"><em style="font-size:.82rem">"My CA sends me data in April. I want to know what I'm worth today."</em></div>
+<ul style="font-size:.82rem;margin-top:.75rem">
+<li><strong>Goals:</strong> Single number, family wealth view, CA-shareable PDF</li>
+<li><strong>Willingness to pay:</strong> Very high — price insensitive for good tools</li>
+<li><strong>Acquisition:</strong> CA/wealth manager referral, word of mouth</li>
+</ul>
+</div>
+<div class="card">
+<div style="font-weight:700;font-size:1.05rem;color:var(--p);margin-bottom:.25rem">The Goal-Setter</div>
+<div style="font-size:.8rem;color:var(--tm);margin-bottom:.75rem">28–42 years · Investable: ₹10L–₹1 Cr · Growth target</div>
+<span class="tag">Goal-planning</span><span class="tag">SIPs</span><span class="tag">EMIs</span><span class="tag">Retirement</span><span class="tag">Child education</span>
+<p style="font-size:.84rem;margin:.75rem 0 0">Mid-career professional. Multiple financial goals (retirement, child's college, home). Has started investing but doesn't know if SIPs are adequate. Wants to see the gap between current trajectory and what's needed. Highly motivated by goal visualisation.</p>
+<div class="callout cw" style="margin-top:.75rem;padding:.6rem .9rem"><em style="font-size:.82rem">"I invest ₹50K/month — but I genuinely don't know if I'm on track for retirement."</em></div>
+<ul style="font-size:.82rem;margin-top:.75rem">
+<li><strong>Goals:</strong> Corpus projection, goal tagging, gap analysis, SIP recommendation</li>
+<li><strong>Willingness to pay:</strong> High — immediate emotional value from goal clarity</li>
+<li><strong>Acquisition:</strong> Content marketing, personal finance influencers, word of mouth</li>
+</ul>
+</div>
+</div>
+
+<!-- S6 -->
+<h2 id="s6"><span class="snum">06</span> User Journey Maps</h2>
+<h3>Journey 1 — The Serious Saver (First Week)</h3>
+<table class="tbl">
+<thead><tr><th>Stage</th><th>Action</th><th>Emotion</th><th>Artha Response</th><th>Success Metric</th></tr></thead>
+<tbody>
+<tr><td><strong>Discovery</strong></td><td>Sees LinkedIn post: "I computed my PMS true XIRR..."</td><td>Curious, skeptical</td><td>Clear landing page: "See your true PMS return in 2 minutes"</td><td>Clicks CTA</td></tr>
+<tr><td><strong>Signup</strong></td><td>Google OAuth, enters profile (tax bracket, risk profile)</td><td>Hopeful but cautious</td><td>Show progress bar: "3 steps to your first insight"</td><td>Completes profile</td></tr>
+<tr><td><strong>First data</strong></td><td>Adds PMS (invested ₹1Cr, current value, benchmark)</td><td>Nervous (sharing data)</td><td>Instant XIRR + "PMS Verdict" card appears</td><td>First "aha moment"</td></tr>
+<tr><td><strong>Expansion</strong></td><td>Adds stocks (CSV import), MF (manual), EPF</td><td>Engaged, building</td><td>Net worth bar grows, XIRR updates live</td><td>3+ asset classes added</td></tr>
+<tr><td><strong>First insight</strong></td><td>Reads: "Your PMS earned 9.2% XIRR vs Nifty500 TRI 14.1% over 3Y"</td><td>Surprised / concerned</td><td>Show fee drag: "₹2.1L paid in fees, ₹4.8L of underperformance"</td><td>Upgrades to Pro</td></tr>
+<tr><td><strong>Habit</strong></td><td>Opens every Monday to check weekly moves</td><td>Informed, in control</td><td>Weekly AI summary arrives Sunday evening</td><td>DAU/MAU &gt;30%</td></tr>
+</tbody></table>
+
+<h3>Journey 2 — DIY Analyst (Spreadsheet Replacement)</h3>
+<table class="tbl">
+<thead><tr><th>Stage</th><th>Action</th><th>Emotion</th><th>Artha Response</th><th>Friction Point</th></tr></thead>
+<tbody>
+<tr><td><strong>Discovery</strong></td><td>r/IndiaInvestments post about XIRR calculator</td><td>Interested</td><td>Free tier: XIRR for up to 3 asset classes</td><td>Skeptical of yet another app</td></tr>
+<tr><td><strong>Import</strong></td><td>Uploads Zerodha CSV: 3 years of transactions</td><td>Excited (no manual entry!)</td><td>Preview all trades, show XIRR instantly</td><td>CSV format mismatch → helpful error message</td></tr>
+<tr><td><strong>Comparison</strong></td><td>Sees portfolio vs Nifty500 benchmark chart</td><td>Proud or humbled</td><td>Rolling 1Y/3Y comparison chart</td><td>Wants more asset classes → hits free tier limit</td></tr>
+<tr><td><strong>Upgrade trigger</strong></td><td>Tries to add EPF (4th asset class)</td><td>Frustrated by limit</td><td>"Upgrade to Pro — all 9 asset classes, ₹149/mo"</td><td>Must see value before paying</td></tr>
+<tr><td><strong>Tax cockpit</strong></td><td>Opens tax cockpit, sees ₹45K LTCG harvestable</td><td>Delighted — immediate ROI</td><td>"Harvesting this saves ₹4,500 in tax. Here's how."</td><td>Converts to Pro</td></tr>
+</tbody></table>
+
+<!-- S7: WIREFRAMES -->
+<h2 id="s7"><span class="snum">07</span> Screen Wireframes</h2>
+<p>HTML mockups of the 6 most critical screens. These define layout, information hierarchy, and key interactions.</p>
+
+<h3>WF-01: Dashboard (Home)</h3>
+<div class="wf">
+<div class="wf-bar">Artha <span>Dashboard</span> <span style="margin-left:auto">Vishal · Pro</span></div>
+<div class="wf-nav">
+<span class="wf-nav-item active">Dashboard</span><span class="wf-nav-item">Portfolio</span><span class="wf-nav-item">Analytics</span><span class="wf-nav-item">Tax</span><span class="wf-nav-item">Insights</span>
+</div>
+<div class="wf-row">
+<div class="wf-box dark" style="flex:2"><div class="wf-label">Total Net Worth</div><div class="wf-val">₹1,24,37,842</div><div style="font-size:.72rem;color:rgba(255,255,255,.6);margin-top:.2rem">↑ ₹3,42,100 today (+0.28%) · ↑ 14.2% YTD</div></div>
+<div class="wf-box accent"><div class="wf-label">Portfolio XIRR</div><div class="wf-val">16.4%</div><div style="font-size:.72rem;color:var(--tm)">vs Nifty500: 14.1%</div></div>
+<div class="wf-box"><div class="wf-label">Total Invested</div><div class="wf-val" style="color:var(--p)">₹89,14,000</div><div style="font-size:.72rem;color:var(--s)">+₹35,23,842 gain</div></div>
+</div>
+<div class="wf-row">
+<div class="wf-box" style="flex:1.2">
+<div class="wf-label">Asset Allocation</div>
+<div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.4rem">
+<div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem"><div style="width:12px;height:12px;border-radius:50%;background:#4f46e5"></div>Stocks — 34% · ₹42.3L</div>
+<div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div>Mutual Funds — 22% · ₹27.4L</div>
+<div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem"><div style="width:12px;height:12px;border-radius:50%;background:#d97706"></div>PMS — 18% · ₹22.4L</div>
+<div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem"><div style="width:12px;height:12px;border-radius:50%;background:#7c3aed"></div>EPF + PPF — 16% · ₹19.9L</div>
+<div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem"><div style="width:12px;height:12px;border-radius:50%;background:#0891b2"></div>NPS + ULIP — 10% · ₹12.4L</div>
+</div>
+</div>
+<div class="wf-box" style="flex:2">
+<div class="wf-label">Net Worth Trend (12M)</div>
+<div class="wf-chart">
+<div class="wf-bar-item" style="height:45%"></div><div class="wf-bar-item" style="height:52%"></div><div class="wf-bar-item" style="height:48%"></div><div class="wf-bar-item" style="height:60%"></div><div class="wf-bar-item" style="height:58%"></div><div class="wf-bar-item" style="height:65%"></div><div class="wf-bar-item" style="height:70%"></div><div class="wf-bar-item" style="height:68%"></div><div class="wf-bar-item" style="height:75%"></div><div class="wf-bar-item" style="height:80%"></div><div class="wf-bar-item" style="height:88%"></div><div class="wf-bar-item" style="height:100%"></div>
+</div>
+</div>
+</div>
+<div class="wf-row">
+<div class="wf-box" style="flex:1"><div class="wf-label">AI Insight</div><div style="font-size:.78rem;color:var(--t);margin-top:.3rem">⚡ Your PMS underperformed Nifty500 by 4.9% last year after fees. <span style="color:var(--a);font-weight:600">Read full analysis →</span></div></div>
+<div class="wf-box" style="flex:1"><div class="wf-label">Top Movers Today</div><div style="font-size:.78rem;margin-top:.3rem"><div>↑ KPIL +3.2% · +₹18,400</div><div>↑ RELIANCE +1.1% · +₹8,200</div><div>↓ HDFC MF −0.4% · −₹1,100</div></div></div>
+<div class="wf-box" style="flex:1"><div class="wf-label">Tax Alert</div><div style="font-size:.78rem;color:var(--d);margin-top:.3rem">⚠ ₹1,82,400 LTCG this FY (above ₹1.25L threshold). <span style="color:var(--a);font-weight:600">View tax cockpit →</span></div></div>
+</div>
+</div>
+
+<h3>WF-02: Portfolio Overview</h3>
+<div class="wf">
+<div class="wf-bar">Artha <span>Portfolio</span></div>
+<div class="wf-row" style="margin-bottom:.5rem">
+<div class="wf-box" style="padding:.5rem .75rem;display:flex;align-items:center;gap:1rem;flex:3"><span style="font-size:.78rem;color:var(--tm)">Filter:</span><span class="tag" style="cursor:pointer;background:var(--a);color:#fff">All</span><span class="tag" style="cursor:pointer">Stocks</span><span class="tag" style="cursor:pointer">MF</span><span class="tag" style="cursor:pointer">Debt</span></div>
+<div class="wf-box" style="padding:.5rem .75rem;display:flex;align-items:center;gap:.5rem;flex:1"><span style="font-size:.78rem;color:var(--tm)">Sort by:</span><span style="font-size:.78rem;font-weight:600">XIRR ↓</span></div>
+</div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#4f46e5"></div><div style="flex:2;font-weight:600">Direct Equity (Stocks)</div><div style="flex:1;text-align:right">₹42,31,200</div><div style="flex:1;text-align:right;color:var(--s)">22.4% XIRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹18,31,200</div><div style="flex:.5;text-align:right">›</div></div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#059669"></div><div style="flex:2;font-weight:600">Mutual Funds</div><div style="flex:1;text-align:right">₹27,41,800</div><div style="flex:1;text-align:right;color:var(--s)">16.8% XIRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹9,41,800</div><div style="flex:.5;text-align:right">›</div></div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#d97706"></div><div style="flex:2;font-weight:600">PMS — Unifi Capital</div><div style="flex:1;text-align:right">₹22,40,000</div><div style="flex:1;text-align:right;color:var(--w)">9.2% XIRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹2,40,000</div><div style="flex:.5;text-align:right">›</div></div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#7c3aed"></div><div style="flex:2;font-weight:600">EPF — KEC Trust</div><div style="flex:1;text-align:right">₹14,82,100</div><div style="flex:1;text-align:right;color:var(--s)">8.6% XIRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹4,82,100</div><div style="flex:.5;text-align:right">›</div></div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#0891b2"></div><div style="flex:2;font-weight:600">NPS Tier I</div><div style="flex:1;text-align:right">₹8,21,400</div><div style="flex:1;text-align:right;color:var(--s)">11.3% TWRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹2,21,400</div><div style="flex:.5;text-align:right">›</div></div>
+<div class="wf-table-row"><div class="wf-dot" style="background:#dc2626"></div><div style="flex:2;font-weight:600">ULIP — Tata AIA</div><div style="flex:1;text-align:right">₹4,18,200</div><div style="flex:1;text-align:right;color:var(--d)">3.1% XIRR</div><div style="flex:1;text-align:right;color:var(--s)">+₹18,200</div><div style="flex:.5;text-align:right">›</div></div>
+</div>
+
+<h3>WF-03: Add Holding — PMS Form</h3>
+<div class="wf">
+<div class="wf-bar">Add Holding <span>PMS</span></div>
+<div class="wf-form">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">PMS Provider *</div><input class="wf-input" value="Unifi Capital" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Strategy Name *</div><input class="wf-input" value="Coffee Can Portfolio" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Investment Date *</div><input class="wf-input" value="15 Jan 2022" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Amount Invested (₹) *</div><input class="wf-input" value="1,00,00,000" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Current Value (₹) *</div><input class="wf-input" value="1,12,40,000" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Benchmark</div><input class="wf-input" value="Nifty 500 TRI" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Mgmt Fee (%)</div><input class="wf-input" value="2.00%" readonly></div>
+<div><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Profit Sharing (%)</div><input class="wf-input" value="20% above 10% hurdle" readonly></div>
+</div>
+<div style="margin-top:.75rem"><div style="font-size:.75rem;font-weight:600;margin-bottom:.2rem">Additional Cash Flows (optional)</div><div style="font-size:.75rem;color:var(--tm)">+ Add withdrawal / top-up for accurate XIRR</div></div>
+<div style="margin-top:.75rem;display:flex;gap:.5rem"><button class="wf-btn">Save &amp; Compute XIRR</button><button class="wf-btn sec">Cancel</button></div>
+</div>
+<div class="callout ci" style="margin-top:.75rem;padding:.6rem .9rem"><strong>Live Preview:</strong> XIRR = 9.2% · Benchmark TWRR = 14.1% · Underperformance = −4.9% · Fees paid = ₹2,14,800</div>
+</div>
+
+<h3>WF-04: Tax Cockpit</h3>
+<div class="wf">
+<div class="wf-bar">Artha <span>Tax Cockpit</span> <span>FY 2025-26</span></div>
+<div class="wf-row">
+<div class="wf-box accent"><div class="wf-label">Total LTCG (Equity)</div><div class="wf-val">₹1,82,400</div><div style="font-size:.72rem;color:var(--d)">₹57,400 above ₹1.25L threshold</div></div>
+<div class="wf-box"><div class="wf-label">Tax Liability (LTCG)</div><div class="wf-val" style="color:var(--d)">₹5,740</div><div style="font-size:.72rem;color:var(--tm)">10% on ₹57,400 excess</div></div>
+<div class="wf-box"><div class="wf-label">Total STCG</div><div class="wf-val" style="color:var(--w)">₹24,200</div><div style="font-size:.72rem;color:var(--tm)">₹3,630 tax @ 15%</div></div>
+<div class="wf-box" style="border:2px solid var(--s)"><div class="wf-label">Harvestable Loss</div><div class="wf-val" style="color:var(--s)">₹38,400</div><div style="font-size:.72rem;color:var(--s)">Can save ₹3,840 in tax</div></div>
+</div>
+<div style="margin-top:.75rem"><div class="wf-label" style="margin-bottom:.4rem">80C Utilization</div>
+<div style="background:#f1f5f9;border-radius:8px;padding:.6rem .8rem;font-size:.78rem">
+<div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span>EPF (employee)</span><span style="font-weight:600">₹62,400</span></div>
+<div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span>PPF</span><span style="font-weight:600">₹1,50,000</span></div>
+<div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span>ULIP premium</span><span style="font-weight:600">₹50,000</span></div>
+<div style="display:flex;justify-content:space-between;border-top:1px solid var(--b);padding-top:.3rem;font-weight:700"><span>Total vs ₹1,50,000 limit</span><span style="color:var(--s)">₹1,50,000 ✓ Fully utilized</span></div>
+</div>
+</div>
+<div class="callout cs" style="margin-top:.75rem;padding:.6rem .9rem">
+<strong>Harvesting Suggestion:</strong> Sell HDFC Bank (loss ₹21,200) + ICICI MF (loss ₹17,200) → repurchase after 30 days. Net LTCG drops below ₹1.25L threshold. <strong>Tax saved: ₹5,740.</strong>
+</div>
+</div>
+
+<h3>WF-05: ULIP Honesty Score</h3>
+<div class="wf">
+<div class="wf-bar">ULIP Detail <span>Tata AIA Fortune Pro</span></div>
+<div class="wf-row">
+<div class="wf-box"><div class="wf-label">Total Premiums Paid</div><div class="wf-val">₹4,00,000</div><div style="font-size:.72rem">₹1L/yr × 4 years</div></div>
+<div class="wf-box"><div class="wf-label">Current Fund Value</div><div class="wf-val" style="color:var(--s)">₹4,18,200</div><div style="font-size:.72rem;color:var(--s)">Above break-even ✓</div></div>
+<div class="wf-box accent"><div class="wf-label">True XIRR (after all charges)</div><div class="wf-val">3.1%</div><div style="font-size:.72rem;color:var(--d)">vs PPF: 7.1%</div></div>
+</div>
+<div style="margin-top:.75rem;background:#fff;border:1px solid var(--b);border-radius:8px;padding:.75rem">
+<div class="wf-label" style="margin-bottom:.4rem">Charge Decomposition (Year 4)</div>
+<div style="font-size:.78rem">
+<div style="display:flex;justify-content:space-between;padding:.25rem 0;border-bottom:1px solid var(--b)"><span>Premium Allocation Charge (3%)</span><span>₹3,000</span></div>
+<div style="display:flex;justify-content:space-between;padding:.25rem 0;border-bottom:1px solid var(--b)"><span>Mortality Charge (age-based)</span><span>₹2,400</span></div>
+<div style="display:flex;justify-content:space-between;padding:.25rem 0;border-bottom:1px solid var(--b)"><span>Fund Management Charge (1.35%)</span><span>₹5,650</span></div>
+<div style="display:flex;justify-content:space-between;padding:.25rem 0;font-weight:700;color:var(--d)"><span>Total charges this year</span><span>₹11,050</span></div>
+</div>
+</div>
+<div class="callout cw" style="margin-top:.75rem;padding:.6rem .9rem"><strong>Alternative:</strong> Term insurance (₹18L cover, ₹6,000/yr) + ELSS SIP (₹94,000/yr in same fund) → estimated XIRR: 14.2%. You're leaving ₹11.1% on the table annually.</div>
+</div>
+
+<h3>WF-06: AI Insights Feed</h3>
+<div class="wf">
+<div class="wf-bar">AI Insights <span>This Week</span></div>
+<div style="display:flex;flex-direction:column;gap:.6rem">
+<div style="background:#fff;border:1px solid var(--b);border-left:4px solid var(--d);border-radius:8px;padding:.75rem;font-size:.82rem">
+<div style="font-size:.7rem;color:var(--d);font-weight:700;text-transform:uppercase;margin-bottom:.3rem">⚠ Performance Alert</div>
+Your PMS (Unifi Capital) has underperformed Nifty500 TRI by <strong>4.9% annually</strong> over the past 3 years on a TWRR basis. After ₹2.14L in cumulative fees, your net alpha is <strong>−2.3%</strong>. A passive Nifty500 index fund would have added ₹4.2L more to your corpus.
+</div>
+<div style="background:#fff;border:1px solid var(--b);border-left:4px solid var(--w);border-radius:8px;padding:.75rem;font-size:.82rem">
+<div style="font-size:.7rem;color:var(--w);font-weight:700;text-transform:uppercase;margin-bottom:.3rem">📋 Tax Alert</div>
+Your LTCG this FY is ₹1,82,400 — ₹57,400 above the ₹1.25L exemption. Tax liability: ₹5,740. You can eliminate this entirely by harvesting ₹38,400 of losses in your MF portfolio. <strong>Act before March 31.</strong>
+</div>
+<div style="background:#fff;border:1px solid var(--b);border-left:4px solid var(--s);border-radius:8px;padding:.75rem;font-size:.82rem">
+<div style="font-size:.7rem;color:var(--s);font-weight:700;text-transform:uppercase;margin-bottom:.3rem">🎯 Milestone</div>
+Your direct equity portfolio has crossed <strong>₹40L</strong> for the first time. XIRR: 22.4% over 4 years. You've outperformed Nifty500 TRI (14.1%) by 8.3% annually — strong stock selection alpha.
+</div>
+<div style="background:#fff;border:1px solid var(--b);border-left:4px solid var(--a);border-radius:8px;padding:.75rem;font-size:.82rem">
+<div style="font-size:.7rem;color:var(--a);font-weight:700;text-transform:uppercase;margin-bottom:.3rem">💡 Opportunity</div>
+Your savings account holds ₹8.4L at 3.5% interest. Moving ₹6L to a liquid mutual fund (current yield 6.8%) would earn ₹3,300 more per month with next-day liquidity.
+</div>
+</div>
+</div>
+
+<!-- S8: ASSET CLASSES -->
+<h2 id="s8"><span class="snum">08</span> Asset Classes — Full Specification</h2>
+<table class="tbl">
+<thead><tr><th>Asset</th><th>MVP Input</th><th>Phase 2 Input</th><th>Price/NAV Source</th><th>Key Metrics</th><th>Benchmark</th></tr></thead>
+<tbody>
+<tr><td><strong>Stocks</strong></td><td>Zerodha CSV + manual</td><td>Multi-broker CSV, CDSL CAS</td><td>yfinance (SYMBOL.NS, 15-min cache)</td><td>XIRR, LTCG/STCG per lot (FIFO), unrealized P&amp;L</td><td>Nifty50, Nifty500, Midcap150, Smallcap250</td></tr>
+<tr><td><strong>Mutual Funds</strong></td><td>Manual (folio, scheme, units, nav, date)</td><td>CAS PDF AI parse, CAS email parse</td><td>AMFI daily file (free)</td><td>XIRR per folio, TWRR, category avg comparison</td><td>TRI of scheme benchmark, category average</td></tr>
+<tr><td><strong>EPF</strong></td><td>Manual (monthly contributions + annual interest)</td><td>EPFO passbook PDF parse</td><td>User-entered declared rate</td><td>XIRR, projected corpus at 58, effective post-tax return</td><td>PPF rate, 10yr G-Sec yield</td></tr>
+<tr><td><strong>PPF</strong></td><td>Manual (annual deposits + interest)</td><td>Passbook PDF parse</td><td>User-entered declared rate (7.1%)</td><td>XIRR, projected maturity corpus, 80C utilization, lock-in years remaining</td><td>EPF rate, fixed deposit 5yr rate</td></tr>
+<tr><td><strong>SSY</strong></td><td>Manual (deposits + daughter DOB + open date)</td><td>Passbook PDF parse</td><td>System applies current 8.2% rate</td><td>XIRR, projected corpus at maturity (age 21), 80C utilization, partial withdrawal year (age 18)</td><td>PPF rate, small savings scheme rates</td></tr>
+<tr><td><strong>NPS</strong></td><td>Manual (PRAN, Tier I/II, E/C/G allocation, contributions, current NAV)</td><td>CRA statement PDF parse</td><td>User-entered current NAV</td><td>TWRR (NAV-based), XIRR (on contributions), projected annuity corpus, 80CCD(1B) tracker</td><td>NPS-E vs Nifty500, NPS-G vs G-Sec index</td></tr>
+<tr><td><strong>ULIP</strong></td><td>Manual (premium, start date, fund value, fund chosen)</td><td>Annual statement PDF parse</td><td>User-entered current fund value</td><td>True XIRR (premiums paid vs fund value), break-even year, charge decomposition, term+MF alternative comparison</td><td>ELSS category XIRR, PPF rate</td></tr>
+<tr><td><strong>PMS</strong></td><td>Manual (provider, strategy, invested (date-wise), current value, benchmark, fees)</td><td>Monthly statement PDF parse</td><td>User-entered current value</td><td>XIRR, TWRR (if NAV history), alpha vs benchmark, total fees paid, fee drain (fees paid minus alpha generated in ₹)</td><td>Nifty500, specified strategy benchmark</td></tr>
+<tr><td><strong>Fixed Deposits</strong></td><td>Manual (bank, principal, rate, start date, maturity date)</td><td>Account Aggregator (Phase 3)</td><td>Computed from rate</td><td>XIRR (= interest rate), effective post-tax yield (user tax bracket), maturity amount, days to maturity</td><td>SBI FD rate equivalent tenure, 1yr T-bill</td></tr>
+<tr><td><strong>Bank Accounts</strong></td><td>Manual balance entry, PDF statement upload</td><td>AI transaction parsing, Account Aggregator (Phase 3)</td><td>N/A</td><td>Monthly savings rate, income vs expense, opportunity cost vs liquid MF</td><td>Savings rate benchmark, liquid MF yield</td></tr>
+</tbody></table>
+
+<!-- S9: FEATURE SPEC -->
+<h2 id="s9"><span class="snum">09</span> Feature Specification</h2>
+<table class="tbl">
+<thead><tr><th>Feature</th><th>Phase</th><th>P</th><th>Tier</th><th>Description &amp; Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Net Worth Dashboard</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>Total wealth, asset allocation donut, day/month/YTD change, top movers, quick XIRR summary</td></tr>
+<tr><td><strong>Multi-asset manual entry</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free (3 assets)</td><td>Dynamic forms per asset class. All required fields validated. Editable + deletable holdings.</td></tr>
+<tr><td><strong>Transaction history</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>Full dated transaction log per holding. Add/edit/delete individual transactions.</td></tr>
+<tr><td><strong>Stock CSV import</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>Zerodha P&amp;L CSV format. Column auto-detection. Preview before import. Duplicate detection.</td></tr>
+<tr><td><strong>Live stock prices</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>yfinance (SYMBOL.NS). 15-min cache. Auto-refresh on dashboard open. Manual refresh button.</td></tr>
+<tr><td><strong>MF NAV auto-fetch</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>AMFI daily file. Cron at 5PM IST. Scheme lookup by AMFI code with name search fallback.</td></tr>
+<tr><td><strong>XIRR computation</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>Free</td><td>Per holding, per asset class, portfolio total. scipy Newton-Raphson. Cached in portfolio_metrics.</td></tr>
+<tr><td><strong>Auth (email + Google)</strong></td><td><span class="pb p0">MVP</span></td><td>P0</td><td>All</td><td>Supabase Auth. Email/password + Google OAuth. Email verify required. RLS on all tables.</td></tr>
+<tr><td><strong>FD maturity alerts</strong></td><td><span class="pb p0">MVP</span></td><td>P1</td><td>Free</td><td>Email via Resend at 30 days and 7 days before maturity. Alert shows post-tax yield + current best FD rates.</td></tr>
+<tr><td><strong>TWRR engine</strong></td><td><span class="pb p1">Phase 1</span></td><td>P1</td><td>Pro</td><td>Chain-linked sub-period returns for MF, PMS, NPS. Daily NAV required. Stored in nav_history.</td></tr>
+<tr><td><strong>Benchmark comparison</strong></td><td><span class="pb p1">Phase 1</span></td><td>P1</td><td>Pro</td><td>Per asset vs natural benchmark. Portfolio vs Nifty500. Rolling 1M/3M/6M/1Y/3Y/5Y. TRI basis.</td></tr>
+<tr><td><strong>AI Commentary (weekly)</strong></td><td><span class="pb p1">Phase 1</span></td><td>P1</td><td>Pro</td><td>Claude Haiku. 3–5 bullets. Generated Sunday 7PM IST. Stored in ai_insights. Read/unread tracking.</td></tr>
+<tr><td><strong>Tax Cockpit</strong></td><td><span class="pb p1">Phase 1</span></td><td>P1</td><td>Pro</td><td>Live LTCG/STCG by asset. 80C utilization (EPF+PPF+SSY+ELSS+ULIP). Harvesting suggestions. FIFO lot accounting.</td></tr>
+<tr><td><strong>ULIP Honesty Score</strong></td><td><span class="pb p1">Phase 1</span></td><td>P2</td><td>Pro</td><td>True XIRR (premiums vs fund value). Charge decomposition. Break-even year. Term+MF alternative XIRR.</td></tr>
+<tr><td><strong>PMS Verdict</strong></td><td><span class="pb p1">Phase 1</span></td><td>P2</td><td>Pro</td><td>Total fees paid. Alpha vs benchmark. Fee drain in ₹. Rolling returns table. "Was it worth it?" summary.</td></tr>
+<tr><td><strong>Performance attribution</strong></td><td><span class="pb p1">Phase 1</span></td><td>P2</td><td>Pro</td><td>Which asset class drove/hurt returns. Contribution to portfolio XIRR by asset. Bar chart visualization.</td></tr>
+<tr><td><strong>Quarterly PDF report</strong></td><td><span class="pb p1">Phase 1</span></td><td>P2</td><td>Pro</td><td>Net worth snapshot, returns summary, AI insights, tax position. Shareable with CA. Generated on demand.</td></tr>
+<tr><td><strong>PDF statement import</strong></td><td><span class="pb p2">Phase 2</span></td><td>P1</td><td>Pro</td><td>AI parsing for CAS, bank statement, ULIP, PMS, EPFO. Preview extracted data before confirm.</td></tr>
+<tr><td><strong>Account Aggregator</strong></td><td><span class="pb p3">Phase 3</span></td><td>P1</td><td>Elite</td><td>Finvu/Onemoney integration. Live bank balance + FD data. Consent-based. Annual renewal.</td></tr>
+<tr><td><strong>Goal-based planning</strong></td><td><span class="pb p4">Phase 4</span></td><td>P2</td><td>Elite</td><td>Retirement, education, home. Portfolio mapped to goals. SIP required calculator. Shortfall tracker.</td></tr>
+<tr><td><strong>Family wealth view</strong></td><td><span class="pb p4">Phase 4</span></td><td>P3</td><td>Elite</td><td>Add spouse / family member. Combined net worth view. HUF tracking.</td></tr>
+<tr><td><strong>Rebalancing engine</strong></td><td><span class="pb p4">Phase 4</span></td><td>P3</td><td>Elite</td><td>Target allocation vs current. Tax-efficient rebalancing path. Sell/buy suggestions.</td></tr>
+</tbody></table>
+
+<!-- S10: USER STORIES -->
+<h2 id="s10"><span class="snum">10</span> User Stories &amp; Acceptance Criteria</h2>
+
+<h3>Authentication &amp; Onboarding</h3>
+<div class="story">
+<div class="as">US-001 · Auth</div>
+<div class="want">As a new user, I want to sign up with Google OAuth in one click</div>
+<div class="so">so that I don't need to remember another password</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>Google OAuth button on signup and login page</li>
+<li>On first Google login, user profile created with name + email from Google</li>
+<li>User directed to profile setup (tax bracket, risk profile) before dashboard</li>
+<li>Existing email-password users can link Google account later in settings</li>
+</ul></div></div>
+
+<div class="story">
+<div class="as">US-002 · Onboarding</div>
+<div class="want">As a new user, I want a guided first-run experience that gets me to my first insight in under 5 minutes</div>
+<div class="so">so that I immediately understand the product's value</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>After signup: 3-step wizard (profile → add first holding → see dashboard)</li>
+<li>Progress bar visible throughout wizard</li>
+<li>Wizard can be skipped, but nudge appears on dashboard until first holding added</li>
+<li>First "aha moment" (XIRR shown) must occur before wizard ends</li>
+<li>Time from signup to first XIRR displayed &lt; 5 minutes (P50)</li>
+</ul></div></div>
+
+<h3>Portfolio Management</h3>
+<div class="story">
+<div class="as">US-010 · Stock Import</div>
+<div class="want">As a Zerodha user, I want to upload my P&amp;L CSV and have all my stock trades automatically imported</div>
+<div class="so">so that I don't have to enter 200 trades manually</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>Accept Zerodha P&amp;L CSV format (standard columns: symbol, trade_date, trade_type, quantity, price)</li>
+<li>Auto-detect column headers even if slightly renamed</li>
+<li>Show import preview: N trades, N symbols, date range, before confirmation</li>
+<li>Detect and flag duplicate transactions (same date + symbol + quantity + price)</li>
+<li>Show import success summary: "X trades imported across Y symbols"</li>
+<li>Handle partial failures gracefully: import valid rows, show errors for invalid rows</li>
+</ul></div></div>
+
+<div class="story">
+<div class="as">US-011 · XIRR Display</div>
+<div class="want">As an investor, I want to see XIRR for each of my holdings and my total portfolio</div>
+<div class="so">so that I can compare performance across different investments on a common basis</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>XIRR shown for every holding with at least 2 transactions (entry + current value)</li>
+<li>XIRR shown per asset class (aggregated across all holdings in that class)</li>
+<li>Total portfolio XIRR computed across all cash flows</li>
+<li>XIRR displayed as annualized percentage to 1 decimal (e.g., "14.2%")</li>
+<li>For holdings with insufficient data: show "–" with tooltip explaining why</li>
+<li>XIRR recalculated automatically when new transactions are added or prices update</li>
+</ul></div></div>
+
+<div class="story">
+<div class="as">US-015 · PMS Entry</div>
+<div class="want">As a PMS investor, I want to see my true XIRR after all fees and compare it to the benchmark</div>
+<div class="so">so that I can objectively evaluate if my PMS manager is worth the fee</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>PMS form captures: provider, strategy, investment date, amount, current value, benchmark, fee structure</li>
+<li>Multiple cash flows supported (add/withdrawal dates + amounts for accurate XIRR)</li>
+<li>Show "PMS Verdict" card: XIRR vs benchmark TWRR, fees paid (₹), net alpha in ₹</li>
+<li>Benchmark TWRR loaded from benchmark_data table (daily Nifty500 TRI values)</li>
+<li>Fee drain calculated as: (fees paid) minus (alpha generated in ₹). Negative = PMS destroying value</li>
+</ul></div></div>
+
+<div class="story">
+<div class="as">US-016 · ULIP True XIRR</div>
+<div class="want">As a ULIP holder, I want to see my true XIRR after all charges, not the insurer's reported "fund return"</div>
+<div class="so">so that I can make an honest assessment of my ULIP's performance</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>XIRR computed on actual premium payments (dates + amounts) vs current fund value</li>
+<li>Clearly labeled "True XIRR (after all charges)" — distinct from "fund NAV performance"</li>
+<li>Break-even indicator: green checkmark if fund value &gt; total premiums paid, red X if not</li>
+<li>Charge decomposition shown if entered: premium allocation, mortality, admin, FMC</li>
+<li>Alternative calculation: equivalent term insurance cost + MF investment XIRR shown for comparison</li>
+</ul></div></div>
+
+<h3>Analytics</h3>
+<div class="story">
+<div class="as">US-020 · Tax Cockpit</div>
+<div class="want">As a tax-aware investor, I want to see my current LTCG exposure and tax harvesting opportunities before March 31</div>
+<div class="so">so that I can avoid paying unnecessary capital gains tax</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>LTCG computed per lot (FIFO) for all equity holdings (stocks + equity MF)</li>
+<li>Total LTCG shown with breakdown: amount within ₹1.25L exemption + amount above</li>
+<li>Tax liability computed: 10% on LTCG above ₹1.25L threshold</li>
+<li>Identify loss-making lots that can be harvested to offset LTCG (show top 5 opportunities)</li>
+<li>For each harvesting suggestion: lot details, loss amount, estimated tax saved</li>
+<li>Warning: "Repurchase same security after 30 days to avoid wash sale issues"</li>
+<li>80C tracker: EPF + PPF + SSY + ELSS + ULIP vs ₹1.5L limit</li>
+</ul></div></div>
+
+<div class="story">
+<div class="as">US-021 · AI Commentary</div>
+<div class="want">As a Pro user, I want to receive AI-generated weekly insights about my portfolio</div>
+<div class="so">so that I get actionable intelligence without having to analyze all the data myself</div>
+<div class="ac"><div class="ac-title">Acceptance Criteria</div><ul>
+<li>Commentary generated every Sunday 7PM IST via Vercel cron</li>
+<li>Generated for each Pro/Elite user with at least 2 asset classes and ₹1L+ total value</li>
+<li>Content: 3–5 bullets covering performance vs benchmark, alerts, opportunities, milestones</li>
+<li>Tone: factual, direct, no fluff. Cites specific numbers (₹ amounts, percentages)</li>
+<li>Shown as card in "Insights" tab. Unread badge on nav icon.</li>
+<li>Each insight has: severity (info/warning/success), date, read/unread state</li>
+<li>Never recommends specific products (no "you should buy X fund")</li>
+</ul></div></div>
+
+<!-- S11: SCREEN INVENTORY -->
+<h2 id="s11"><span class="snum">11</span> Screen Inventory</h2>
+<table class="tbl">
+<thead><tr><th>Screen ID</th><th>Screen Name</th><th>Phase</th><th>Route</th><th>Auth?</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>SC-01</td><td>Landing Page</td><td><span class="pb p0">MVP</span></td><td>/</td><td>No</td><td>Hero, USP, screenshots, pricing, CTA</td></tr>
+<tr><td>SC-02</td><td>Signup</td><td><span class="pb p0">MVP</span></td><td>/signup</td><td>No</td><td>Email/password + Google OAuth</td></tr>
+<tr><td>SC-03</td><td>Login</td><td><span class="pb p0">MVP</span></td><td>/login</td><td>No</td><td>Email/password + Google OAuth + forgot password</td></tr>
+<tr><td>SC-04</td><td>Onboarding Wizard</td><td><span class="pb p0">MVP</span></td><td>/onboard</td><td>Yes</td><td>3-step: profile setup → first holding → dashboard preview</td></tr>
+<tr><td>SC-05</td><td>Dashboard</td><td><span class="pb p0">MVP</span></td><td>/dashboard</td><td>Yes</td><td>Net worth, allocation, XIRR summary, movers, AI insight preview</td></tr>
+<tr><td>SC-06</td><td>Portfolio Overview</td><td><span class="pb p0">MVP</span></td><td>/portfolio</td><td>Yes</td><td>All asset classes, expandable holdings, sortable</td></tr>
+<tr><td>SC-07</td><td>Holding Detail</td><td><span class="pb p0">MVP</span></td><td>/portfolio/[id]</td><td>Yes</td><td>Full transaction history, return chart, all metrics, edit/delete</td></tr>
+<tr><td>SC-08</td><td>Add Holding</td><td><span class="pb p0">MVP</span></td><td>/portfolio/add</td><td>Yes</td><td>Asset class selector → dynamic form → live preview of XIRR</td></tr>
+<tr><td>SC-09</td><td>Import (CSV)</td><td><span class="pb p0">MVP</span></td><td>/import/csv</td><td>Yes</td><td>Upload CSV, column mapping, preview, confirm</td></tr>
+<tr><td>SC-10</td><td>Settings</td><td><span class="pb p0">MVP</span></td><td>/settings</td><td>Yes</td><td>Profile, tax bracket, risk profile, notification prefs, subscription</td></tr>
+<tr><td>SC-11</td><td>Analytics</td><td><span class="pb p1">Phase 1</span></td><td>/analytics</td><td>Yes (Pro)</td><td>TWRR, rolling returns, benchmark comparison, performance attribution</td></tr>
+<tr><td>SC-12</td><td>Tax Cockpit</td><td><span class="pb p1">Phase 1</span></td><td>/tax</td><td>Yes (Pro)</td><td>LTCG/STCG by asset, 80C tracker, harvesting suggestions</td></tr>
+<tr><td>SC-13</td><td>AI Insights</td><td><span class="pb p1">Phase 1</span></td><td>/insights</td><td>Yes (Pro)</td><td>Weekly commentary feed, alerts, milestones, read/unread</td></tr>
+<tr><td>SC-14</td><td>Reports</td><td><span class="pb p1">Phase 1</span></td><td>/reports</td><td>Yes (Pro)</td><td>Generate/download quarterly PDF. History of past reports.</td></tr>
+<tr><td>SC-15</td><td>ULIP Deep Dive</td><td><span class="pb p1">Phase 1</span></td><td>/portfolio/[id]/ulip</td><td>Yes (Pro)</td><td>True XIRR, charge decomposition, break-even, alternative calc</td></tr>
+<tr><td>SC-16</td><td>PMS Verdict</td><td><span class="pb p1">Phase 1</span></td><td>/portfolio/[id]/pms</td><td>Yes (Pro)</td><td>Fee drain analysis, alpha vs benchmark, rolling returns table</td></tr>
+<tr><td>SC-17</td><td>Import (PDF AI)</td><td><span class="pb p2">Phase 2</span></td><td>/import/pdf</td><td>Yes (Pro)</td><td>Upload statement PDF, AI extraction, preview, confirm import</td></tr>
+<tr><td>SC-18</td><td>Goals</td><td><span class="pb p4">Phase 4</span></td><td>/goals</td><td>Yes (Elite)</td><td>Goal creation, portfolio mapping, SIP calculator, shortfall tracker</td></tr>
+<tr><td>SC-19</td><td>Family</td><td><span class="pb p4">Phase 4</span></td><td>/family</td><td>Yes (Elite)</td><td>Add family members, combined wealth view, individual breakdowns</td></tr>
+<tr><td>SC-20</td><td>Account Aggregator</td><td><span class="pb p3">Phase 3</span></td><td>/connect/aa</td><td>Yes (Elite)</td><td>AA consent flow, connected accounts, live balance</td></tr>
+</tbody></table>
+
+<!-- S12: METRICS ENGINE -->
+<h2 id="s12"><span class="snum">12</span> Metrics Engine</h2>
+<div class="callout ci"><h4>Three metrics, three purposes — never confused</h4><p><strong>XIRR</strong> = what your money earned (cash-flow adjusted). <strong>TWRR</strong> = how the manager performed (cash-flow neutral). <strong>Absolute Return</strong> = simple ₹ and % gain. Each answers a different question. Artha shows all three, labeled clearly.</p></div>
+
+<h3>XIRR — Implementation Detail</h3>
+<ul>
+<li><strong>Algorithm:</strong> Newton-Raphson iteration solving: Σ [Cᵢ / (1+r)^(dᵢ/365)] = 0, where Cᵢ = cash flow on day dᵢ, r = XIRR</li>
+<li><strong>Implementation:</strong> <code>scipy.optimize.newton()</code> in Python serverless function. JavaScript fallback: <code>xirr</code> npm package.</li>
+<li><strong>Cash flow convention:</strong> Investments = negative cash flows. Withdrawals/redemptions = positive cash flows. Terminal value (current price × units) = positive cash flow dated today.</li>
+<li><strong>Edge cases:</strong> Single transaction → display simple annualized return instead. All transactions same date → display absolute return. XIRR computation failure → display "N/A" with tooltip.</li>
+<li><strong>Performance:</strong> Computed server-side. Cached in <code>portfolio_metrics</code> table. Cache invalidated on new transaction or price update. Cache TTL: 24 hours for positions unchanged.</li>
+</ul>
+
+<h3>TWRR — Implementation Detail</h3>
+<ul>
+<li><strong>Algorithm:</strong> Chain-linked sub-period returns. For each sub-period between cash flows: rₙ = (V_end) / (V_start + CF_inflow) − 1. TWRR = ∏(1 + rₙ) − 1</li>
+<li><strong>Data requirement:</strong> Daily NAV history. For MF: fetched from AMFI. For NPS: user-entered current NAV (monthly granularity acceptable). For PMS: user-entered monthly valuations.</li>
+<li><strong>When to use:</strong> MF, PMS, NPS only. EPF/PPF/SSY use XIRR (no daily NAV). Stocks use XIRR.</li>
+<li><strong>Benchmark TWRR:</strong> Nifty50 TRI, Nifty500 TRI, category average stored in <code>benchmark_data</code> table. Loaded from NSE/external source daily.</li>
+</ul>
+
+<h3>Tax Computation — LTCG/STCG Engine</h3>
+<ul>
+<li><strong>Lot tracking:</strong> Each buy transaction = one lot. Sells reduce lots in FIFO order.</li>
+<li><strong>Equity (Stocks + Equity MF):</strong> Holding period &lt;12 months: STCG at 15%. ≥12 months: LTCG at 10% on gains above ₹1.25L threshold.</li>
+<li><strong>Debt MF (post March 2023):</strong> All gains taxed at slab rate regardless of holding period.</li>
+<li><strong>LTCG threshold:</strong> ₹1.25L cumulative per FY (April–March). Artha tracks running total from April 1 each year.</li>
+<li><strong>Tax harvesting logic:</strong> Identify lots with LTCG &gt; remaining threshold room. Find offsetting loss lots in same category. Net savings = min(LTCG in lot, loss in offsetting lot) × 10%.</li>
+</ul>
+
+<!-- S13: PHASE ROADMAP -->
+<h2 id="s13"><span class="snum">13</span> Phase-wise Roadmap</h2>
+<div class="phase-row pr0">
+<div class="pr-head"><span class="pb p0">Phase 0 — MVP</span><span style="font-size:.83rem;color:var(--tm)">Now → Week 4 · 9 asset classes, manual entry, XIRR, live prices, dashboard</span></div>
+<p style="font-size:.87rem"><strong>Goal:</strong> Working product for personal use. Cover the core portfolio tracking use case end-to-end. No bells and whistles — just a clean, honest net worth dashboard.</p>
+<h4>Deliverables</h4>
+<ul style="font-size:.85rem">
+<li>Supabase project with full schema (all tables, RLS policies, indexes)</li>
+<li>Next.js 14 App Router project on Vercel (dev + prod environments)</li>
+<li>Supabase Auth: email/password + Google OAuth</li>
+<li>Manual entry forms for all 9 asset classes with validation</li>
+<li>Zerodha P&amp;L CSV import with preview</li>
+<li>yfinance stock price fetch (Python serverless, 15-min cache)</li>
+<li>AMFI daily NAV fetch (Vercel cron 5PM IST, stored in mf_nav_daily)</li>
+<li>XIRR computation endpoint (Python + scipy, cached results)</li>
+<li>Dashboard: net worth, allocation donut, XIRR summary, movers</li>
+<li>Portfolio list + holding detail views</li>
+<li>FD maturity email alerts (Resend, Vercel cron)</li>
+<li>Mobile-responsive layout (PWA manifest)</li>
+</ul>
+<div class="callout cs" style="margin-top:.75rem"><h4>MVP Success Criterion</h4><p>User can enter their full portfolio across all 9 asset classes, see XIRR for each, and view total net worth — on mobile — in under 10 minutes from signup.</p></div>
+</div>
+
+<div class="phase-row pr1">
+<div class="pr-head"><span class="pb p1">Phase 1 — Analytics + Goal Planning</span><span style="font-size:.83rem;color:var(--tm)">Week 6–12 · TWRR, benchmarks, AI, tax, ULIP, PMS deep-dives + Goal OS</span></div>
+<ul style="font-size:.85rem">
+<li>TWRR engine: chain-linked computation for MF, PMS, NPS with NAV history storage</li>
+<li>Benchmark data pipeline: daily Nifty50/500/Midcap TRI values from NSE (free data)</li>
+<li>Rolling returns charts: 1M, 3M, 6M, 1Y, 3Y, 5Y — portfolio vs benchmark</li>
+<li>AI Commentary: Claude Haiku weekly generation. Cron Sunday 7PM. Stored in ai_insights.</li>
+<li>Tax Cockpit: FIFO lot accounting, LTCG/STCG, 80C tracker, harvesting suggestions</li>
+<li>ULIP deep-dive: true XIRR, charge decomposition, break-even, term+MF alternative</li>
+<li>PMS Verdict: fee drain calculation, alpha vs benchmark rolling table</li>
+<li>Performance attribution chart: % contribution to portfolio XIRR by asset class</li>
+<li>Quarterly PDF report (React PDF or Puppeteer screenshot)</li>
+<li>Weekly email digest (portfolio summary + top AI insight)</li>
+<li>Paywall enforcement: 3-asset-class limit on free tier, Pro/Elite unlock flow</li>
+<li><strong>[NEW v3] Goal Planning Module:</strong> Create life goals (retirement, child education, home down payment, vacation, emergency fund, custom). Set target corpus, target year, inflation assumption. AI computes required monthly SIP to reach goal.</li>
+<li><strong>[NEW v3] Goal Tagging:</strong> Tag existing holdings to a goal (e.g., "tag this MF to Retirement"). One holding can contribute to multiple goals (partial allocation). Dashboard shows each goal's funded % and projected corpus at target date.</li>
+<li><strong>[NEW v3] Goal Progress Dashboard:</strong> For each goal: current corpus, required corpus, gap, on-track status (green/amber/red), AI suggestion ("Increase SIP by ₹8,000/mo to stay on track").</li>
+<li><strong>[NEW v3] Retirement Corpus Calculator:</strong> Input current age, retirement age, monthly expenses, inflation rate, life expectancy → computes required corpus and gap vs current wealth trajectory. Inflation-adjusted projections with Monte Carlo optional in v2.</li>
+</ul>
+</div>
+
+<div class="phase-row pr2">
+<div class="pr-head"><span class="pb p2">Phase 2 — Smart Import + Research Concierge</span><span style="font-size:.83rem;color:var(--tm)">Week 13–20 · PDF parsing + paid research reports launch</span></div>
+<ul style="font-size:.85rem">
+<li>CAS PDF + email AI parsing → auto-import all MF holdings and transactions</li>
+<li>Bank statement PDF parsing → extract transactions, categorize (salary/expense/investment)</li>
+<li>ULIP annual statement PDF parser → extract premiums, fund value, charge breakdown</li>
+<li>PMS monthly statement PDF parser → extract portfolio value, transactions</li>
+<li>EPFO passbook PDF parser → extract contributions and interest</li>
+<li>NPS CRA statement PDF parser → extract contributions, NAV, corpus</li>
+<li>Google Sheets import/export connector</li>
+<li>Bulk import history: show all imported files, re-import capability, import error log</li>
+<li><strong>[NEW v3] Research Concierge — Soft Launch:</strong> User submits stock research request via in-app form (stock name, report type). Makes payment (Razorpay). AI pipeline generates report with validation loop (Claude Sonnet/Opus + web search + financial data APIs). PDF delivered within 24–48 hrs, permanently saved to user's Report Vault.</li>
+<li><strong>[NEW v3] Report Types (Phase 2):</strong> (1) Concall Analysis — latest earnings call transcript, key takeaways, management tone, guidance vs actual; (2) Forensic Quick Check — Beneish M-Score, receivables quality, cash conversion; (3) Valuation Snapshot — reverse DCF at current price, implied growth rate, fair value range</li>
+</ul>
+</div>
+
+<div class="phase-row pr3">
+<div class="pr-head"><span class="pb p3">Phase 3 — Live Data</span><span style="font-size:.83rem;color:var(--tm)">Month 5–8 · API connectivity + real-time data</span></div>
+<ul style="font-size:.85rem">
+<li>Account Aggregator (AA) integration: Finvu or Onemoney partnership (free sandbox → production)</li>
+<li>AA consent flow: user grants consent → bank + FD data streams automatically</li>
+<li>MF Central / BSE StarMF API: register as RIA/distributor → real-time NAV, folio data</li>
+<li>EPFO UAN API (when government opens): automatic passbook sync</li>
+<li>NPS CRA API: PRAN-based automatic statement fetch</li>
+<li>Zerodha Kite API connector: live positions, historical trades, P&amp;L</li>
+<li>NSE real-time data feed (for Elite tier): live prices during market hours</li>
+</ul>
+</div>
+
+<div class="phase-row pr4">
+<div class="pr-head"><span class="pb p4">Phase 4 — Full Research Suite + Advanced Features</span><span style="font-size:.83rem;color:var(--tm)">Month 8–14 · Complete investing concierge</span></div>
+<ul style="font-size:.85rem">
+<li>SIP optimizer: given goal and timeline, compute required monthly SIP (auto-adjusts for existing investments tagged to goal)</li>
+<li>Rebalancing engine: compute deviation from target allocation, suggest tax-efficient trades</li>
+<li>Family wealth view: add spouse, adult children. Combined net worth + individual views.</li>
+<li>Financial health score (0–100): like a credit score for wealth management quality</li>
+<li>Insurance adequacy check: life cover vs net worth, health cover vs family size</li>
+<li>Gold tracking: Sovereign Gold Bonds, digital gold, physical (manual valuation)</li>
+<li>Real estate tracker: manual valuation, rental yield, EMI vs rent analysis</li>
+<li>React Native mobile app (iOS + Android)</li>
+<li><strong>[NEW v3] Full Research Concierge Suite:</strong>
+  <ul>
+    <li>Report Type 1 — <strong>Concall Analysis</strong> (₹499): Latest earnings call. Key management statements, guidance vs prior guidance, tone analysis, 5 key takeaways, red flags. Delivered in 12 hrs.</li>
+    <li>Report Type 2 — <strong>Management Walk the Talk</strong> (₹799): 3-year promise vs delivery audit. What management guided and what actually happened. Credibility score.</li>
+    <li>Report Type 3 — <strong>Forensic Financial Analysis</strong> (₹999): Beneish M-Score, Altman Z-Score, Piotroski F-Score, receivables quality, cash conversion analysis, related party flag.</li>
+    <li>Report Type 4 — <strong>Valuation Analysis</strong> (₹999): Reverse DCF at current price, implied growth rate, scenario analysis (bull/base/bear), peer comparison table.</li>
+    <li>Report Type 5 — <strong>Comprehensive Research Report</strong> (₹1,999): Full institutional-grade report. Business model, competitive position, financial analysis, management assessment, valuation, verdict + target price. 15–25 pages.</li>
+    <li><strong>Validation Loop:</strong> AI generates draft → automated fact-check against source data → human QA flag if confidence &lt;80% → final PDF generation. No report ships without passing validation.</li>
+    <li><strong>Report Vault:</strong> All purchased reports permanently saved to user account. Accessible forever. Shareable link (24-hr expiry). Download as PDF.</li>
+    <li><strong>Subscription Bundle:</strong> Elite+ users get 2 free reports/month. Additional reports at 20% discount.</li>
+  </ul>
+</li>
+</ul>
+</div>
+
+<div class="phase-row pr5">
+<div class="pr-head"><span class="pb p5">Phase 5 — Platform + Product Marketplace</span><span style="font-size:.83rem;color:var(--tm)">Year 2 · B2B2C, white-label, curated product shelf</span></div>
+<ul style="font-size:.85rem">
+<li>RIA/MFD advisor mode: manage multiple client portfolios from one dashboard</li>
+<li>White-label: wealth managers can brand Artha for their clients</li>
+<li>CA collaboration: share read-only + downloadable reports with CA/tax advisor</li>
+<li>API marketplace: expose Artha data as API for third-party integrations</li>
+<li>Community: anonymized peer benchmarking — "investors with similar profiles earn X% XIRR"</li>
+<li>Viral "Wealth Card": shareable year-in-review card (like Spotify Wrapped for investments)</li>
+<li>SEBI RIA registration pathway (if expanding to formal advisory)</li>
+<li><strong>[NEW v3] Artha Product Marketplace:</strong> Curated financial products (direct MF, SGBs, corporate bonds, term insurance, health insurance) hand-screened against Artha's quality criteria. Revenue: flat referral fee per transaction (not % AUM commission). Artha never promotes the highest-commission product — only the best-fit product for the user's goal. Trust-preserving monetisation. Requires SEBI/IRDAI regulatory clearance.</li>
+<li><strong>[NEW v3] Research Subscription Tiers:</strong> Artha Research Basic (3 reports/yr, ₹2,999/yr), Artha Research Pro (12 reports/yr, ₹9,999/yr), Artha Research Unlimited (unlimited, ₹19,999/yr). Corporate plans for investment clubs and family offices.</li>
+</ul>
+</div>
+
+<!-- S14: MVP SPEC -->
+<h2 id="s14"><span class="snum">14</span> MVP Specification</h2>
+
+<div class="callout cs"><h4>MVP Priority Shift: Import First, Manual Second</h4><p>v3.0 elevates brokerage statement import from Phase 2 to MVP. If every interaction is manual entry, user fatigue kills activation. Auto-import for the top 7 brokers (covering ~85% of Indian retail transaction volume) ships in Phase 0. Manual entry remains available for asset classes not covered by brokers (EPF, PPF, NPS, ULIP, PMS).</p></div>
+
+<h3>Brokerage Auto-Import — MVP Priority</h3>
+<p>Support top 7 Indian brokers, covering ~85% of retail equity and MF transaction volume. System auto-detects the broker from file headers — no manual selection required.</p>
+<table class="tbl">
+<thead><tr><th>Broker</th><th>File Type</th><th>Format</th><th>Detection Signal</th><th>MF Support</th></tr></thead>
+<tbody>
+<tr><td><strong>Zerodha</strong></td><td>CSV (P&amp;L)</td><td>symbol, trade_date, trade_type, quantity, price, brokerage</td><td>Header contains "tradingsymbol" or "instrument_type"</td><td>Partial (via CDSL CAS)</td></tr>
+<tr><td><strong>Groww</strong></td><td>CSV (Account Statement)</td><td>Stock name, Date, Transaction type, Quantity, Price, Amount</td><td>Header contains "Groww" or "SCRIP NAME" pattern</td><td>Yes (MF section auto-parsed)</td></tr>
+<tr><td><strong>Upstox</strong></td><td>CSV</td><td>Script Name, Date, Buy/Sell, Qty, Price, Net Amount</td><td>"Script Name" + "Exchange" columns</td><td>Partial</td></tr>
+<tr><td><strong>Angel One</strong></td><td>XLSX / CSV</td><td>Symbol, Trade Date, Trade Type, Qty, Trade Price</td><td>"Angel Broking" / "Angel One" in file name or header</td><td>No</td></tr>
+<tr><td><strong>ICICI Direct</strong></td><td>XLSX</td><td>Stock Name, Trade Date, Action, Quantity, Rate, Amount</td><td>"ICICI Direct" in header or "Action" = "B"/"S" pattern</td><td>Yes (separate MF section)</td></tr>
+<tr><td><strong>HDFC Securities</strong></td><td>XLSX</td><td>Script Name, Transaction Date, Transaction Type, Quantity, Rate</td><td>"HDFC Securities" in filename or header</td><td>No</td></tr>
+<tr><td><strong>Kotak Securities</strong></td><td>CSV</td><td>Symbol, Date, Transaction Type, Qty, Price</td><td>"Kotak" in header or filename</td><td>No</td></tr>
+</tbody></table>
+
+<h3>Import Flow — UX Design</h3>
+<div class="card-grid">
+<div class="card"><strong>Step 1: Upload</strong><br><span style="font-size:.84rem;color:var(--tm)">Drag-and-drop or file picker. Accepts CSV, XLSX, PDF. Multiple files allowed in one session.</span></div>
+<div class="card"><strong>Step 2: Auto-Detect</strong><br><span style="font-size:.84rem;color:var(--tm)">System fingerprints the file header and announces: "Detected: Zerodha P&amp;L — 847 transactions." User can override if wrong.</span></div>
+<div class="card"><strong>Step 3: Preview &amp; Confirm</strong><br><span style="font-size:.84rem;color:var(--tm)">Scrollable preview of parsed transactions with color-coded BUY/SELL. Any unrecognised rows highlighted for manual review.</span></div>
+<div class="card"><strong>Step 4: Dedup &amp; Import</strong><br><span style="font-size:.84rem;color:var(--tm)">System checks against existing transactions (by ISIN + date + qty + price). Shows: "12 duplicates skipped, 835 new transactions imported." Commit button. XIRR refreshes immediately.</span></div>
+</div>
+
+<h3>Deduplication Logic</h3>
+<ul>
+<li><strong>Primary key for dedup:</strong> (symbol/ISIN, trade_date, trade_type, quantity, price) — all 5 must match to be a duplicate</li>
+<li><strong>Fuzzy match:</strong> Same symbol, same date, quantity within 1 unit — flagged as "probable duplicate", user confirms</li>
+<li><strong>Multi-file import:</strong> User can upload Zerodha 2022, Zerodha 2023, Zerodha 2024 in one session — system merges and dedups across all three</li>
+<li><strong>Cross-broker dedup:</strong> If same stock appears in both Zerodha and Groww files (e.g., moved broker), system flags for user confirmation</li>
+</ul>
+
+<h3>MVP Data Entry Matrix (Manual Fallback)</h3>
+<table class="tbl">
+<thead><tr><th>Asset</th><th>Required Fields (MVP)</th><th>Optional Fields</th><th>Live Data</th></tr></thead>
+<tbody>
+<tr><td><strong>Stocks</strong></td><td>Symbol, Buy Date, Buy Price, Quantity</td><td>ISIN, Exchange, Brokerage paid, Notes</td><td>Current price via yfinance</td></tr>
+<tr><td><strong>Mutual Funds</strong></td><td>AMFI Code (scheme search), Purchase Date, Units, Purchase NAV</td><td>Folio number, SIP flag, Notes</td><td>Current NAV from AMFI file</td></tr>
+<tr><td><strong>EPF</strong></td><td>Account name/trust, Month, Employee Contribution, Employer Contribution, Interest Rate</td><td>UAN, VPF amount, Closing balance</td><td>None (manual)</td></tr>
+<tr><td><strong>PPF</strong></td><td>Bank, Account open date, Annual deposit amounts+dates, Current balance</td><td>Account number, Partial withdrawal history</td><td>None (manual)</td></tr>
+<tr><td><strong>SSY</strong></td><td>Daughter name + DOB, Account open date, Annual deposit amounts+dates, Current balance</td><td>Bank, Account number</td><td>System applies current 8.2% rate</td></tr>
+<tr><td><strong>NPS</strong></td><td>PRAN, Tier (I/II), Allocation %, Monthly contributions + dates, Current NAV per unit, Units</td><td>Fund manager, Employer contribution</td><td>None (user-entered)</td></tr>
+<tr><td><strong>ULIP</strong></td><td>Insurer, Plan name, Annual premium, Policy start date, Current fund value</td><td>Fund name, Policy number, Mortality + admin charge amounts</td><td>None (user-entered)</td></tr>
+<tr><td><strong>PMS</strong></td><td>Provider, Strategy, Investment date, Amount invested, Current value</td><td>Benchmark, Mgmt fee %, Profit share %, Cash flows (for better XIRR)</td><td>None (user-entered)</td></tr>
+<tr><td><strong>FD</strong></td><td>Bank/NBFC, Principal, Interest rate, Start date, Maturity date</td><td>FD type (cumulative/non-cumulative), Interest payout frequency</td><td>None (computed)</td></tr>
+<tr><td><strong>Bank</strong></td><td>Bank name, Account type, Current balance</td><td>Account number (last 4 digits)</td><td>None (manual)</td></tr>
+</tbody></table>
+
+<!-- S15: TECH ARCHITECTURE -->
+<h2 id="s15"><span class="snum">15</span> Technical Architecture</h2>
+<h3>Tech Stack</h3>
+<table class="tbl">
+<thead><tr><th>Layer</th><th>Technology</th><th>Version</th><th>Why This Choice</th></tr></thead>
+<tbody>
+<tr><td>Frontend Framework</td><td>Next.js (App Router)</td><td>14.x</td><td>Vercel-native. React Server Components reduce client JS bundle. File-based routing. Excellent for SEO.</td></tr>
+<tr><td>Language</td><td>TypeScript</td><td>5.x</td><td>Type safety across full stack. Required for large codebase maintainability.</td></tr>
+<tr><td>Styling</td><td>Tailwind CSS + shadcn/ui</td><td>3.4 / latest</td><td>Rapid development. Dense financial UI needs utility-first approach. shadcn = accessible, unstyled components.</td></tr>
+<tr><td>Charts</td><td>Recharts</td><td>2.x</td><td>React-native rendering. Lightweight. Area/Bar/Pie/ComposedChart all needed. Responsive containers built-in.</td></tr>
+<tr><td>Database</td><td>Supabase (PostgreSQL 15)</td><td>latest</td><td>RLS for multi-user data isolation at database level. Built-in Auth. Real-time subscriptions. Free tier: 500MB + 50K monthly active users.</td></tr>
+<tr><td>Auth</td><td>Supabase Auth</td><td>latest</td><td>Integrated with RLS. Email + OAuth. JWT tokens. PKCE flow for Next.js App Router.</td></tr>
+<tr><td>File Storage</td><td>Supabase Storage</td><td>latest</td><td>Uploaded CSVs + PDFs. User-scoped bucket policies. 1GB free tier.</td></tr>
+<tr><td>API Routes</td><td>Next.js API Routes</td><td>14.x</td><td>Serverless on Vercel. Edge runtime for latency-sensitive endpoints. Node.js runtime for Python interop.</td></tr>
+<tr><td>XIRR/Finance</td><td>Python (scipy.optimize)</td><td>3.11</td><td>Battle-tested Newton-Raphson. XIRR involves iterative optimization — scipy is production-grade. Deployed as Vercel Python function.</td></tr>
+<tr><td>Stock Prices</td><td>yfinance (Python)</td><td>0.2.x</td><td>Free, no API key. SYMBOL.NS format for NSE. Reliable for 15-min delayed data. Cache in DB to avoid rate limits.</td></tr>
+<tr><td>MF NAV</td><td>AMFI public file</td><td>daily</td><td>Free, no API key, official source, covers 100% of Indian MFs. URL stable for years.</td></tr>
+<tr><td>AI Commentary</td><td>Claude Haiku (claude-haiku-4-5)</td><td>latest</td><td>1/10th cost of Sonnet. Structured JSON output. Weekly generation per user is low-frequency — total cost &lt;₹500/month for 1,000 users.</td></tr>
+<tr><td>Email</td><td>Resend</td><td>latest</td><td>Simple REST API. Reliable delivery. Free: 3,000 emails/month. React Email templates.</td></tr>
+<tr><td>Deployment</td><td>Vercel</td><td>latest</td><td>Zero-config Next.js. Edge network. 100K function invocations/month free. Automatic branch previews.</td></tr>
+<tr><td>Cron Jobs</td><td>Vercel Cron</td><td>latest</td><td>Native to Vercel. Define in vercel.json. Daily NAV fetch + weekly AI + FD alerts. Free on all plans.</td></tr>
+<tr><td>PDF Generation</td><td>@react-pdf/renderer</td><td>3.x</td><td>React components → PDF. No headless browser needed. Lighter than Puppeteer for Vercel serverless.</td></tr>
+</tbody></table>
+
+<h3>Cron Job Schedule</h3>
+<table class="tbl">
+<thead><tr><th>Job Name</th><th>Schedule (IST)</th><th>Function</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>fetch-amfi-nav</td><td>5:30 PM daily</td><td>/api/cron/nav</td><td>Download AMFI NAV file, parse, upsert into mf_nav_daily. ~5,000 scheme NAVs.</td></tr>
+<tr><td>refresh-stock-prices</td><td>3:35 PM daily (market days)</td><td>/api/cron/stocks</td><td>Fetch prices for all unique symbols in holdings. Batch yfinance calls.</td></tr>
+<tr><td>compute-metrics</td><td>6:00 PM daily</td><td>/api/cron/metrics</td><td>Recompute XIRR for all holdings with price updates. Update portfolio_metrics cache.</td></tr>
+<tr><td>fd-maturity-alerts</td><td>8:00 AM daily</td><td>/api/cron/fd-alerts</td><td>Query FDs maturing in 7 or 30 days. Send email alerts via Resend.</td></tr>
+<tr><td>ai-commentary</td><td>7:00 PM Sunday</td><td>/api/cron/ai</td><td>Generate weekly commentary for all Pro/Elite users with ≥2 assets. Claude Haiku API. Store in ai_insights.</td></tr>
+<tr><td>benchmark-fetch</td><td>6:00 PM daily (market days)</td><td>/api/cron/benchmarks</td><td>Fetch Nifty50 TRI, Nifty500 TRI closing values. Store in benchmark_data.</td></tr>
+</tbody></table>
+
+<!-- S16: DB SCHEMA -->
+<h2 id="s16"><span class="snum">16</span> Database Schema</h2>
+<div class="schema-wrap"><pre>
+-- =============================================
+-- CORE TABLES
+-- =============================================
+
+CREATE TABLE user_profiles (
+  id            UUID REFERENCES auth.users PRIMARY KEY,
+  display_name  TEXT,
+  pan_hash      TEXT,              -- SHA-256 hash, NEVER plaintext
+  tax_bracket   INT DEFAULT 30,    -- 20 or 30
+  risk_profile  TEXT CHECK (risk_profile IN ('conservative','moderate','aggressive')),
+  base_currency TEXT DEFAULT 'INR',
+  subscription  TEXT DEFAULT 'free' CHECK (subscription IN ('free','pro','elite')),
+  sub_expires   TIMESTAMPTZ,
+  created_at    TIMESTAMPTZ DEFAULT NOW(),
+  updated_at    TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE asset_classes (
+  id    SERIAL PRIMARY KEY,
+  code  TEXT UNIQUE NOT NULL,
+  name  TEXT NOT NULL,
+  icon  TEXT,
+  color TEXT,
+  sort_order INT
+);
+-- Seed: stocks, mf, epf, ppf, ssy, nps, ulip, pms, fd, bank
+
+CREATE TABLE holdings (
+  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id          UUID REFERENCES auth.users NOT NULL,
+  asset_class_id   INT REFERENCES asset_classes NOT NULL,
+  name             TEXT NOT NULL,
+  account_number   TEXT,
+  current_value    DECIMAL(15,2),
+  total_invested   DECIMAL(15,2),
+  units            DECIMAL(15,6),      -- for MF/NPS/ULIP
+  current_nav      DECIMAL(15,4),      -- for MF/NPS/ULIP
+  is_active        BOOLEAN DEFAULT TRUE,
+  last_refreshed   TIMESTAMPTZ,
+  metadata         JSONB DEFAULT '{}',
+  created_at       TIMESTAMPTZ DEFAULT NOW(),
+  updated_at       TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE transactions (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  holding_id  UUID REFERENCES holdings ON DELETE CASCADE NOT NULL,
+  user_id     UUID REFERENCES auth.users NOT NULL,
+  txn_date    DATE NOT NULL,
+  txn_type    TEXT NOT NULL CHECK (txn_type IN (
+                'buy','sell','sip','redemption','dividend','interest',
+                'contribution','withdrawal','premium','maturity','bonus')),
+  amount      DECIMAL(15,2) NOT NULL,
+  units       DECIMAL(15,6),
+  price       DECIMAL(15,4),
+  notes       TEXT,
+  source      TEXT DEFAULT 'manual' CHECK (source IN ('manual','csv_import','pdf_import','api')),
+  import_id   UUID,                    -- reference to import batch
+  created_at  TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE nav_history (
+  holding_id  UUID REFERENCES holdings ON DELETE CASCADE NOT NULL,
+  date        DATE NOT NULL,
+  nav         DECIMAL(15,4) NOT NULL,
+  total_value DECIMAL(15,2),
+  PRIMARY KEY (holding_id, date)
+);
+
+-- =============================================
+-- MARKET DATA TABLES
+-- =============================================
+
+CREATE TABLE mf_schemes (
+  amfi_code    TEXT PRIMARY KEY,
+  scheme_name  TEXT NOT NULL,
+  fund_house   TEXT,
+  category     TEXT,
+  subcategory  TEXT,
+  plan         TEXT CHECK (plan IN ('Direct','Regular')),
+  option       TEXT CHECK (option IN ('Growth','IDCW','Dividend')),
+  is_active    BOOLEAN DEFAULT TRUE,
+  last_nav     DECIMAL(15,4),
+  last_nav_date DATE,
+  updated_at   TIMESTAMPTZ
+);
+
+CREATE TABLE mf_nav_daily (
+  amfi_code  TEXT REFERENCES mf_schemes,
+  date       DATE NOT NULL,
+  nav        DECIMAL(15,4) NOT NULL,
+  PRIMARY KEY (amfi_code, date)
+);
+CREATE INDEX idx_mf_nav_date ON mf_nav_daily(date DESC);
+
+CREATE TABLE stock_prices (
+  symbol      TEXT PRIMARY KEY,
+  exchange    TEXT DEFAULT 'NSE',
+  price       DECIMAL(15,2),
+  prev_close  DECIMAL(15,2),
+  change_pct  DECIMAL(8,4),
+  volume      BIGINT,
+  fetched_at  TIMESTAMPTZ NOT NULL
+);
+
+CREATE TABLE benchmark_data (
+  benchmark_code  TEXT NOT NULL,
+  date            DATE NOT NULL,
+  value           DECIMAL(15,4) NOT NULL,
+  source          TEXT,
+  PRIMARY KEY (benchmark_code, date)
+);
+CREATE INDEX idx_bench_date ON benchmark_data(benchmark_code, date DESC);
+-- Benchmark codes: nifty50_tri, nifty500_tri, niftymidcap150_tri,
+--                  ppf_rate, sbi_fd_1yr, sbi_fd_3yr, sbi_fd_5yr
+
+-- =============================================
+-- ANALYTICS TABLES
+-- =============================================
+
+CREATE TABLE portfolio_metrics (
+  id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id          UUID REFERENCES auth.users NOT NULL,
+  holding_id       UUID REFERENCES holdings,  -- NULL = portfolio total
+  metric_date      DATE NOT NULL,
+  xirr             DECIMAL(8,4),
+  twrr             DECIMAL(8,4),
+  twrr_1y          DECIMAL(8,4),
+  twrr_3y          DECIMAL(8,4),
+  absolute_return  DECIMAL(8,4),
+  total_invested   DECIMAL(15,2),
+  current_value    DECIMAL(15,2),
+  unrealized_gain  DECIMAL(15,2),
+  ltcg_exposure    DECIMAL(15,2),
+  stcg_exposure    DECIMAL(15,2),
+  tax_liability    DECIMAL(15,2),
+  computed_at      TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, holding_id, metric_date)
+);
+CREATE INDEX idx_metrics_user ON portfolio_metrics(user_id, metric_date DESC);
+
+CREATE TABLE ai_insights (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       UUID REFERENCES auth.users NOT NULL,
+  insight_type  TEXT CHECK (insight_type IN ('weekly_summary','alert','opportunity','milestone')),
+  content       TEXT NOT NULL,
+  severity      TEXT DEFAULT 'info' CHECK (severity IN ('info','warning','success','danger')),
+  generated_at  TIMESTAMPTZ DEFAULT NOW(),
+  is_read       BOOLEAN DEFAULT FALSE,
+  expires_at    TIMESTAMPTZ  -- auto-clean old insights
+);
+CREATE INDEX idx_insights_user ON ai_insights(user_id, generated_at DESC);
+
+CREATE TABLE import_batches (
+  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id      UUID REFERENCES auth.users NOT NULL,
+  import_type  TEXT,  -- zerodha_csv, cas_pdf, bank_pdf, etc.
+  filename     TEXT,
+  status       TEXT DEFAULT 'pending',  -- pending/processing/completed/failed
+  rows_total   INT,
+  rows_success INT,
+  rows_failed  INT,
+  error_log    JSONB,
+  created_at   TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- =============================================
+-- ROW LEVEL SECURITY
+-- =============================================
+DO $$ DECLARE t TEXT;
+BEGIN FOR t IN SELECT unnest(ARRAY['holdings','transactions','nav_history',
+  'portfolio_metrics','ai_insights','import_batches']) LOOP
+  EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
+  EXECUTE format('CREATE POLICY users_own_%I ON %I USING (auth.uid() = user_id)', t, t);
+END LOOP; END $$;
+
+-- Public read for market data (no RLS needed)
+-- mf_schemes, mf_nav_daily, stock_prices, benchmark_data are public read
+
+-- =============================================
+-- INDEXES FOR PERFORMANCE
+-- =============================================
+CREATE INDEX idx_holdings_user ON holdings(user_id, asset_class_id);
+CREATE INDEX idx_txn_holding ON transactions(holding_id, txn_date);
+CREATE INDEX idx_txn_user ON transactions(user_id, txn_date DESC);
+CREATE INDEX idx_nav_history ON nav_history(holding_id, date DESC);
+</pre></div>
+
+<!-- S17: DATA DICTIONARY -->
+<h2 id="s17"><span class="snum">17</span> Data Dictionary</h2>
+<h3>holdings.metadata — JSONB Structure per Asset Class</h3>
+<table class="dict-tbl">
+<thead><tr><th>Asset</th><th>Field</th><th>Type</th><th>Description &amp; Example</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><strong>stocks</strong></td><td class="field">symbol</td><td class="type">TEXT</td><td class="desc">NSE/BSE symbol. e.g. "RELIANCE", "KPIL"</td></tr>
+<tr><td class="field">exchange</td><td class="type">TEXT</td><td class="desc">"NSE" or "BSE". Default: NSE. Used to build yfinance ticker (SYMBOL.NS or SYMBOL.BO)</td></tr>
+<tr><td class="field">isin</td><td class="type">TEXT</td><td class="desc">12-char ISIN. Optional but enables cross-broker dedup. e.g. "INE002A01018"</td></tr>
+<tr><td rowspan="4"><strong>mf</strong></td><td class="field">amfi_code</td><td class="type">TEXT</td><td class="desc">AMFI scheme code. FK to mf_schemes. Used for NAV lookup. e.g. "119551"</td></tr>
+<tr><td class="field">fund_house</td><td class="type">TEXT</td><td class="desc">Denormalized from mf_schemes for display. e.g. "HDFC Mutual Fund"</td></tr>
+<tr><td class="field">category</td><td class="type">TEXT</td><td class="desc">AMFI category. e.g. "Equity: Mid Cap", "Debt: Liquid"</td></tr>
+<tr><td class="field">folio_number</td><td class="type">TEXT</td><td class="desc">CAS folio number. Optional. Used for CAS import deduplication.</td></tr>
+<tr><td rowspan="3"><strong>epf</strong></td><td class="field">uan</td><td class="type">TEXT</td><td class="desc">Universal Account Number. 12 digits. Stored as entered (not verified against EPFO).</td></tr>
+<tr><td class="field">trust_name</td><td class="type">TEXT</td><td class="desc">Employer PF trust name or "EPFO (Central)". e.g. "KEC International Ltd PF Trust"</td></tr>
+<tr><td class="field">employer_match_pct</td><td class="type">NUMERIC</td><td class="desc">Employer contribution as % of basic. Default 12. Used for contribution split display.</td></tr>
+<tr><td rowspan="2"><strong>ulip</strong></td><td class="field">insurer</td><td class="type">TEXT</td><td class="desc">Insurance company name. e.g. "Tata AIA Life Insurance"</td></tr>
+<tr><td class="field">plan_name</td><td class="type">TEXT</td><td class="desc">ULIP product name. e.g. "Fortune Pro", "Smart Protect Plan"</td></tr>
+<tr><td rowspan="4"><strong>pms</strong></td><td class="field">provider</td><td class="type">TEXT</td><td class="desc">PMS manager name. e.g. "Unifi Capital", "Avendus Capital"</td></tr>
+<tr><td class="field">strategy</td><td class="type">TEXT</td><td class="desc">Strategy/portfolio name. e.g. "Coffee Can Portfolio", "Emerging India"</td></tr>
+<tr><td class="field">benchmark</td><td class="type">TEXT</td><td class="desc">benchmark_data code to compare against. e.g. "nifty500_tri", "niftymidcap150_tri"</td></tr>
+<tr><td class="field">mgmt_fee_pct</td><td class="type">NUMERIC</td><td class="desc">Annual management fee %. e.g. 2.0 for 2% p.a.</td></tr>
+<tr><td rowspan="4"><strong>fd</strong></td><td class="field">bank</td><td class="type">TEXT</td><td class="desc">Bank or NBFC name. e.g. "HDFC Bank", "Bajaj Finance"</td></tr>
+<tr><td class="field">rate</td><td class="type">NUMERIC</td><td class="desc">Annual interest rate %. e.g. 7.25</td></tr>
+<tr><td class="field">maturity_date</td><td class="type">DATE</td><td class="desc">FD maturity date. Used for maturity alert cron.</td></tr>
+<tr><td class="field">fd_type</td><td class="type">TEXT</td><td class="desc">"cumulative" or "non-cumulative". Affects interest computation.</td></tr>
+</tbody></table>
+
+<!-- S18: API SPECIFICATION -->
+<h2 id="s18"><span class="snum">18</span> API Specification</h2>
+<p>All API routes are under <code>/api/</code> in Next.js. Auth required on all routes (Supabase JWT via Authorization header or cookie). All responses: <code>Content-Type: application/json</code>.</p>
+
+<h3>Holdings</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/holdings</span><span class="ep-desc">List all holdings for authenticated user</span></div>
+<div class="ep-body"><table><thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>asset_class</td><td>query (optional)</td><td>Filter by asset class code (e.g. "stocks", "mf")</td></tr>
+<tr><td>include_metrics</td><td>query (optional, bool)</td><td>Include latest XIRR/TWRR from portfolio_metrics cache</td></tr>
+</tbody></table>
+<strong>Response:</strong> <code>{ holdings: [{id, name, asset_class, current_value, xirr, ...}] }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method post">POST</span><span class="ep-path">/api/holdings</span><span class="ep-desc">Create new holding</span></div>
+<div class="ep-body"><table><thead><tr><th>Field</th><th>Required</th><th>Description</th></tr></thead><tbody>
+<tr><td>asset_class_id</td><td>Yes</td><td>Integer ID from asset_classes table</td></tr>
+<tr><td>name</td><td>Yes</td><td>Display name for the holding</td></tr>
+<tr><td>account_number</td><td>No</td><td>Folio/UAN/PRAN/account number</td></tr>
+<tr><td>metadata</td><td>No</td><td>Asset-class-specific JSON (symbol, AMFI code, etc.)</td></tr>
+<tr><td>initial_transaction</td><td>No</td><td>Optional first transaction to create immediately</td></tr>
+</tbody></table>
+<strong>Response:</strong> <code>{ holding: {id, ...}, xirr: null }</code> (201 Created)</div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/holdings/[id]</span><span class="ep-desc">Get holding detail with full transaction history</span></div>
+<div class="ep-body"><strong>Response:</strong> <code>{ holding: {...}, transactions: [...], metrics: {xirr, twrr, ltcg, stcg} }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method put">PUT</span><span class="ep-path">/api/holdings/[id]</span><span class="ep-desc">Update holding (name, metadata, current value)</span></div>
+<div class="ep-body"><strong>Notes:</strong> Updating current_value triggers XIRR recomputation. Only owner can update (enforced by RLS).</div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method del">DELETE</span><span class="ep-path">/api/holdings/[id]</span><span class="ep-desc">Soft-delete holding (set is_active = false)</span></div>
+<div class="ep-body"><strong>Notes:</strong> Soft delete only — transactions preserved for historical accuracy. Hard delete available in settings after 30 days.</div></div>
+
+<h3>Transactions</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/holdings/[id]/transactions</span><span class="ep-desc">List transactions for a holding</span></div>
+<div class="ep-body"><table><thead><tr><th>Param</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>from_date / to_date</td><td>query (optional)</td><td>Date range filter (YYYY-MM-DD)</td></tr>
+<tr><td>txn_type</td><td>query (optional)</td><td>Filter by transaction type</td></tr>
+</tbody></table></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method post">POST</span><span class="ep-path">/api/holdings/[id]/transactions</span><span class="ep-desc">Add transaction to holding</span></div>
+<div class="ep-body"><table><thead><tr><th>Field</th><th>Required</th><th>Description</th></tr></thead><tbody>
+<tr><td>txn_date</td><td>Yes</td><td>Date of transaction (YYYY-MM-DD)</td></tr>
+<tr><td>txn_type</td><td>Yes</td><td>buy/sell/sip/contribution/premium/interest/etc.</td></tr>
+<tr><td>amount</td><td>Yes</td><td>Transaction amount in ₹. Positive = investment, negative = withdrawal.</td></tr>
+<tr><td>units</td><td>No</td><td>Units purchased/redeemed (MF/NPS/ULIP)</td></tr>
+<tr><td>price</td><td>No</td><td>Price per unit at time of transaction</td></tr>
+</tbody></table>
+<strong>Side effect:</strong> Invalidates XIRR cache for this holding and portfolio total. Triggers async XIRR recomputation.</div></div>
+
+<h3>Portfolio Metrics</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/portfolio/summary</span><span class="ep-desc">Get full portfolio summary (net worth, allocation, XIRR)</span></div>
+<div class="ep-body"><strong>Response:</strong> <code>{ total_value, total_invested, xirr, twrr, by_asset_class: [{code, name, value, pct, xirr}], day_change, ytd_return }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/portfolio/history</span><span class="ep-desc">Get net worth history for charting</span></div>
+<div class="ep-body"><table><thead><tr><th>Param</th><th>Description</th></tr></thead><tbody>
+<tr><td>period</td><td>1M, 3M, 6M, 1Y, 3Y, 5Y, ALL. Default: 1Y.</td></tr>
+<tr><td>interval</td><td>daily, weekly, monthly. Default: depends on period.</td></tr>
+</tbody></table>
+<strong>Response:</strong> <code>{ data: [{date, value, invested}] }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method post">POST</span><span class="ep-path">/api/portfolio/xirr</span><span class="ep-desc">Compute XIRR for arbitrary cash flows (used by frontend for live preview)</span></div>
+<div class="ep-body"><strong>Body:</strong> <code>{ cash_flows: [{date: "YYYY-MM-DD", amount: -100000}, ..., {date: "today", amount: 120000}] }</code><br>
+<strong>Response:</strong> <code>{ xirr: 0.1425 }</code> (annualized, e.g. 14.25%)</div></div>
+
+<h3>Import</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method post">POST</span><span class="ep-path">/api/import/csv</span><span class="ep-desc">Upload and parse Zerodha CSV (multipart/form-data)</span></div>
+<div class="ep-body"><strong>Body:</strong> <code>FormData { file: .csv, dry_run: boolean }</code><br>
+<strong>Response (dry_run=true):</strong> Preview with column mapping, trade count, date range, duplicate list.<br>
+<strong>Response (dry_run=false):</strong> <code>{ import_id, rows_imported, rows_skipped, errors }</code></div></div>
+
+<h3>Market Data</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/prices/stocks</span><span class="ep-desc">Get current prices for list of NSE symbols</span></div>
+<div class="ep-body"><strong>Query:</strong> <code>?symbols=RELIANCE,KPIL,HDFCBANK</code><br>
+<strong>Response:</strong> <code>{ prices: {RELIANCE: {price, change_pct, fetched_at}} }</code><br>
+<strong>Cache:</strong> Returns cached price if &lt;15 minutes old. Triggers background refresh if stale.</div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/prices/mf/[amfi_code]</span><span class="ep-desc">Get latest NAV for a scheme</span></div>
+<div class="ep-body"><strong>Response:</strong> <code>{ amfi_code, scheme_name, nav, date }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/mf/search</span><span class="ep-desc">Search MF schemes by name</span></div>
+<div class="ep-body"><strong>Query:</strong> <code>?q=hdfc+midcap&limit=10</code><br>
+<strong>Response:</strong> <code>{ schemes: [{amfi_code, scheme_name, fund_house, category, last_nav}] }</code></div></div>
+
+<h3>AI &amp; Insights</h3>
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method get">GET</span><span class="ep-path">/api/insights</span><span class="ep-desc">Get AI insights for user (latest 20)</span></div>
+<div class="ep-body"><strong>Response:</strong> <code>{ insights: [{id, insight_type, content, severity, generated_at, is_read}], unread_count }</code></div></div>
+
+<div class="endpoint">
+<div class="ep-head"><span class="ep-method put">PUT</span><span class="ep-path">/api/insights/[id]/read</span><span class="ep-desc">Mark insight as read</span></div>
+<div class="ep-body"><strong>Response:</strong> <code>{ success: true }</code></div></div>
+
+<!-- S19: INTEGRATION SPECS -->
+<h2 id="s19"><span class="snum">19</span> Integration Specifications</h2>
+
+<h3>AMFI Daily NAV File</h3>
+<table class="tbl">
+<thead><tr><th>Parameter</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>URL</td><td><code>https://www.amfiindia.com/spages/NAVAll.txt</code></td></tr>
+<tr><td>Format</td><td>Pipe-delimited text. Header rows for each fund house. Scheme data: <code>Scheme Code|ISIN Div Payout|ISIN Div Reinvestment|Scheme Name|Net Asset Value|Date</code></td></tr>
+<tr><td>Schedule</td><td>Published by AMFI by 9 PM IST every business day. Cron fetch at 5:30 PM (gets previous day) or 9:30 PM (gets today)</td></tr>
+<tr><td>Parse Logic</td><td>Skip lines starting with letter (fund house headers). Extract pipe-split rows. Upsert into mf_nav_daily keyed by (amfi_code, date).</td></tr>
+<tr><td>Volume</td><td>~5,000 schemes. File size ~1.5 MB. Parse time &lt;2 seconds.</td></tr>
+<tr><td>Error handling</td><td>If fetch fails: retry 3x with exponential backoff. Alert if 3 consecutive days of failure. Do not overwrite last successful NAV.</td></tr>
+</tbody></table>
+
+<h3>yfinance Stock Price Integration</h3>
+<table class="tbl">
+<thead><tr><th>Parameter</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Library</td><td><code>yfinance 0.2.x</code> (Python). Deployed as Vercel Python function.</td></tr>
+<tr><td>Ticker format</td><td>NSE: <code>SYMBOL.NS</code> (e.g., <code>RELIANCE.NS</code>). BSE: <code>SYMBOL.BO</code></td></tr>
+<tr><td>Data fetched</td><td><code>yf.Ticker("RELIANCE.NS").fast_info</code> → <code>last_price, previous_close</code>. Batch via <code>yf.download()</code> for multiple symbols.</td></tr>
+<tr><td>Caching</td><td>Cached in <code>stock_prices</code> table. Cache valid 15 minutes during market hours (9:15–3:30 PM IST Mon–Fri). Stale cache returned if API fails.</td></tr>
+<tr><td>Rate limits</td><td>yfinance has no official rate limit but throttles heavy use. Max 50 symbols per batch call. Sleep 0.5s between batches if &gt;50 symbols.</td></tr>
+<tr><td>Fallback</td><td>If yfinance fails: return cached price with <code>is_delayed: true</code> flag. Frontend shows "Price as of [cache timestamp]".</td></tr>
+</tbody></table>
+
+<h3>Zerodha CSV Format</h3>
+<table class="tbl">
+<thead><tr><th>Column</th><th>Zerodha Header</th><th>Format</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Symbol</td><td>symbol</td><td>TEXT</td><td>NSE symbol, e.g. "RELIANCE". No exchange suffix in CSV.</td></tr>
+<tr><td>ISIN</td><td>isin</td><td>TEXT (12 chars)</td><td>Optional. Used for precise deduplication across brokers.</td></tr>
+<tr><td>Trade Date</td><td>trade_date</td><td>DD-MM-YYYY</td><td>Parse with dateutil. Also accept YYYY-MM-DD.</td></tr>
+<tr><td>Trade Type</td><td>trade_type</td><td>buy / sell</td><td>Case-insensitive. "B" and "S" also accepted.</td></tr>
+<tr><td>Quantity</td><td>quantity</td><td>INTEGER</td><td>Always positive. Sign determined by trade_type.</td></tr>
+<tr><td>Price</td><td>price / average_price</td><td>DECIMAL</td><td>Per-share price at which trade executed.</td></tr>
+<tr><td>Brokerage</td><td>brokerage</td><td>DECIMAL</td><td>Optional. If present, added to cost basis for accurate XIRR.</td></tr>
+</tbody></table>
+
+<!-- S20: ERROR HANDLING -->
+<h2 id="s20"><span class="snum">20</span> Error Handling Matrix</h2>
+<table class="tbl">
+<thead><tr><th>Scenario</th><th>HTTP Code</th><th>User Message</th><th>Recovery</th></tr></thead>
+<tbody>
+<tr><td>Stock symbol not found in yfinance</td><td>200 (partial)</td><td>"Price unavailable for [SYMBOL]. Using last known price."</td><td>Show cached price or manual entry prompt</td></tr>
+<tr><td>XIRR cannot converge (no solution)</td><td>200 (partial)</td><td>"XIRR calculation not available. Returns may be negative or data may be incomplete."</td><td>Show absolute return instead</td></tr>
+<tr><td>XIRR with single transaction</td><td>200</td><td>"XIRR requires at least 2 transactions. Showing annualized simple return."</td><td>Compute (Current/Invested)^(365/days)−1</td></tr>
+<tr><td>CSV import: unrecognized columns</td><td>422</td><td>"We couldn't recognize the CSV format. Please check that this is a Zerodha P&amp;L export."</td><td>Show column mapping UI with manual override</td></tr>
+<tr><td>CSV import: duplicate transactions</td><td>200 (partial)</td><td>"X trades were skipped as duplicates. Review and import manually if needed."</td><td>List skipped trades with details</td></tr>
+<tr><td>AMFI NAV file fetch failure</td><td>Cron alert only</td><td>Not shown to user. Last known NAV still displayed with timestamp.</td><td>Retry 3x. Alert admin if 3 consecutive failures.</td></tr>
+<tr><td>Free tier limit reached (3 assets)</td><td>402</td><td>"You've reached the 3 asset class limit on the free plan. Upgrade to Pro to add more."</td><td>Show upgrade modal with pricing</td></tr>
+<tr><td>Auth token expired</td><td>401</td><td>"Your session has expired. Please log in again."</td><td>Redirect to login. Preserve intended destination URL.</td></tr>
+<tr><td>Supabase RLS violation</td><td>403</td><td>"Access denied." (generic — don't reveal data existence)</td><td>Log to monitoring. Return generic error only.</td></tr>
+<tr><td>AI commentary generation failure</td><td>Cron alert only</td><td>Not shown — insight simply not generated that week.</td><td>Retry once. Log failure. User sees previous week's insight.</td></tr>
+<tr><td>PDF upload too large (&gt;10MB)</td><td>413</td><td>"File too large. Please upload a PDF under 10MB."</td><td>Compress PDF prompt + file size guidance</td></tr>
+<tr><td>FD rate entered as 0 or negative</td><td>422 (client-side)</td><td>"Interest rate must be between 0.1% and 20%."</td><td>Real-time validation in form</td></tr>
+</tbody></table>
+
+<!-- S21: PERFORMANCE -->
+<h2 id="s21"><span class="snum">21</span> Performance Requirements</h2>
+<table class="tbl">
+<thead><tr><th>Metric</th><th>Target (P50)</th><th>Target (P95)</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Dashboard load (cached metrics)</td><td>&lt;800ms</td><td>&lt;2s</td><td>XIRR from cache, prices from DB cache</td></tr>
+<tr><td>Dashboard load (fresh, no cache)</td><td>&lt;3s</td><td>&lt;5s</td><td>Price fetch + XIRR computation on first load</td></tr>
+<tr><td>Add holding (form submit)</td><td>&lt;500ms</td><td>&lt;1.5s</td><td>DB write + XIRR computation</td></tr>
+<tr><td>CSV import (100 trades)</td><td>&lt;3s</td><td>&lt;8s</td><td>Parse + dedup + DB upsert + XIRR</td></tr>
+<tr><td>CSV import (1,000 trades)</td><td>&lt;15s</td><td>&lt;30s</td><td>Show progress indicator. Run async if &gt;500 rows.</td></tr>
+<tr><td>XIRR computation (single holding)</td><td>&lt;100ms</td><td>&lt;300ms</td><td>scipy Python function. Newton-Raphson converges in &lt;50 iterations.</td></tr>
+<tr><td>AMFI NAV fetch + parse + upsert</td><td>&lt;30s (cron)</td><td>&lt;60s</td><td>~5,000 rows upserted. Acceptable for background cron.</td></tr>
+<tr><td>AI commentary generation (per user)</td><td>&lt;5s (Claude Haiku)</td><td>&lt;10s</td><td>Batch process all users in cron. Max 500 users/hour reasonable.</td></tr>
+<tr><td>Tax cockpit computation</td><td>&lt;2s</td><td>&lt;5s</td><td>FIFO lot accounting across all equity holdings. Cache result.</td></tr>
+<tr><td>Mobile First Contentful Paint</td><td>&lt;1.5s</td><td>&lt;3s</td><td>Next.js SSR + CDN edge. Lighthouse mobile score &gt;80.</td></tr>
+</tbody></table>
+
+<!-- S22: LEGAL -->
+<h2 id="s22"><span class="snum">22</span> Legal &amp; Compliance</h2>
+<table class="tbl">
+<thead><tr><th>Area</th><th>Requirement</th><th>Implementation</th></tr></thead>
+<tbody>
+<tr><td>SEBI RIA</td><td>Artha provides analytics, NOT investment advice. No "buy this fund" recommendations.</td><td>All AI outputs labeled "For informational purposes only. Not investment advice." Footer disclaimer on all pages. No product recommendations in AI commentary.</td></tr>
+<tr><td>Data Privacy (IT Act 2000, DPDP 2023)</td><td>User financial data is sensitive personal data. Explicit consent required. Right to deletion.</td><td>Explicit consent checkbox on signup. Privacy policy clearly explains data usage. "Delete my account and all data" option in settings. Data deletion executed within 30 days.</td></tr>
+<tr><td>PAN Data</td><td>PAN is sensitive personal data. Cannot be stored in plaintext.</td><td>Store only SHA-256(PAN). Never log PAN. Never send PAN over wire. Display only last 4 chars in UI.</td></tr>
+<tr><td>Encryption at Rest</td><td>Database must encrypt sensitive fields.</td><td>Supabase encrypts entire database at rest (AES-256). Application-layer encryption for PAN_hash.</td></tr>
+<tr><td>Encryption in Transit</td><td>All communications must be TLS 1.2+.</td><td>Vercel enforces HTTPS. Supabase enforces TLS. HSTS header enabled.</td></tr>
+<tr><td>EPFO / NPS Credentials</td><td>Must never store government portal credentials.</td><td>Artha explicitly does NOT store EPFO/NPS passwords. Data ingested via PDF upload only. Stated clearly in onboarding and privacy policy.</td></tr>
+<tr><td>Payment / Subscription</td><td>Subscription billing requires RBI-compliant payment gateway.</td><td>Use Razorpay (Indian gateway, RBI-compliant, subscription API). Store only Razorpay subscription ID — no card data ever stored.</td></tr>
+<tr><td>AMFI Data Usage</td><td>AMFI NAV data is publicly available for any purpose.</td><td>No license restrictions. Cite "NAV data from AMFI" in app footer.</td></tr>
+<tr><td>Account Aggregator (Phase 3)</td><td>Requires FIP/FIU license via RBI framework or partnership with licensed AA.</td><td>Partner with Finvu (already licensed). Artha acts as FIU. User grants consent via AA ecosystem. Data stored locally after fetch.</td></tr>
+<tr><td>Disclaimer</td><td>Must be visible to all users at all times.</td><td>Sticky footer: "Artha is not a SEBI-registered investment advisor. All data is for informational purposes only. Consult a qualified advisor before making investment decisions."</td></tr>
+</tbody></table>
+
+<!-- S23: TESTING -->
+<h2 id="s23"><span class="snum">23</span> Testing Strategy</h2>
+<h3>Unit Tests</h3>
+<ul>
+<li><strong>XIRR function:</strong> Test against Excel XIRR for 20+ known cash flow scenarios including edge cases (single txn, all-loss, redemption-heavy)</li>
+<li><strong>TWRR function:</strong> Test against hand-computed TWRR for 5 scenarios with different cash flow patterns</li>
+<li><strong>LTCG/STCG computation:</strong> 10 test cases covering FIFO lot matching, partial sells, exact 1-year boundary</li>
+<li><strong>Tax harvesting suggestions:</strong> 5 test cases validating correct lot selection and savings calculation</li>
+<li><strong>CSV parser:</strong> 10 test CSV files (clean, dirty columns, partial data, duplicates, edge symbols)</li>
+<li><strong>AMFI NAV parser:</strong> Test against sample AMFI file with known schemes</li>
+</ul>
+<h3>Integration Tests</h3>
+<ul>
+<li>Full user signup flow → add holding → see XIRR on dashboard</li>
+<li>CSV import → holdings created → XIRR computed → prices fetched</li>
+<li>Free tier limit: adding 4th asset class blocked, upgrade modal shown</li>
+<li>FD maturity alert: FD created with maturity 7 days out → cron runs → email sent</li>
+<li>RLS test: user A cannot read user B's holdings via API even with valid JWT</li>
+</ul>
+<h3>E2E Tests (Playwright)</h3>
+<ul>
+<li>New user: signup → onboarding → add PMS → see XIRR → upgrade to Pro → add MF</li>
+<li>Tax cockpit: add stocks with gains → verify LTCG computation → see harvesting suggestion</li>
+<li>Mobile: full dashboard flow on 375px viewport (iPhone SE equivalent)</li>
+</ul>
+<h3>Manual QA Checklist (pre-launch)</h3>
+<ul>
+<li>XIRR matches Excel XIRR for 3 real portfolios entered manually</li>
+<li>MF NAV matches AMFI website for 5 schemes</li>
+<li>Stock prices within 1% of NSE website (15-min lag expected)</li>
+<li>PDF report renders correctly in Chrome + Safari + mobile</li>
+<li>Google OAuth flow works on iOS Safari</li>
+</ul>
+
+<!-- S24: MONETIZATION -->
+<h2 id="s24"><span class="snum">24</span> Monetization &amp; Pricing</h2>
+<p>Artha has three revenue streams: (1) subscription tiers for platform access, (2) per-report research fees, (3) flat referral fees from the product marketplace (Phase 5). No distribution commissions. Ever.</p>
+
+<h3>Subscription Tiers</h3>
+<div class="price-grid">
+<div class="price-card">
+<h3>Starter</h3><div class="price-amt">₹0 <span>/ month</span></div>
+<p style="color:var(--tm);font-size:.82rem;margin:.4rem 0">For investors getting started</p>
+<ul>
+<li>Up to 3 asset classes</li>
+<li>1 broker import (Zerodha only)</li>
+<li>Net worth dashboard</li>
+<li>XIRR for tracked assets</li><li>1 year history</li>
+<li style="color:var(--tl)">No AI commentary</li><li style="color:var(--tl)">No benchmarking</li>
+<li style="color:var(--tl)">No tax cockpit</li>
+<li style="color:var(--tl)">No goal planning</li>
+</ul></div>
+<div class="price-card featured">
+<h3>Pro</h3><div class="price-amt">₹149 <span>/ month</span></div>
+<p style="color:var(--tm);font-size:.82rem;margin:.4rem 0">₹999/year · Best for serious investors</p>
+<ul>
+<li>All 9 asset classes</li>
+<li>All 7 broker imports + dedup</li>
+<li>XIRR + TWRR + benchmarks</li>
+<li>Deep stock &amp; MF analytics</li>
+<li>AI commentary (weekly)</li>
+<li>Tax cockpit (LTCG/STCG/80C)</li>
+<li>Goal planning (up to 5 goals)</li>
+<li>ULIP Honesty Score</li>
+<li>PMS Verdict + fee analysis</li>
+<li>Quarterly PDF reports</li>
+<li>FD maturity alerts</li>
+<li>Unlimited history</li>
+<li style="color:var(--tl)">Research reports: pay-per-report</li>
+</ul></div>
+<div class="price-card">
+<h3>Elite</h3><div class="price-amt">₹299 <span>/ month</span></div>
+<p style="color:var(--tm);font-size:.82rem;margin:.4rem 0">₹1,999/year · For HNIs &amp; families</p>
+<ul>
+<li>Everything in Pro</li>
+<li>Account Aggregator (live bank)</li>
+<li>Real-time MF NAV (API)</li>
+<li>Real-time stock prices</li>
+<li>Family account (3 members)</li>
+<li>Unlimited goals + goal AI advisor</li>
+<li>Read-only CA/advisor share</li>
+<li>Advanced tax optimization</li>
+<li>Rebalancing suggestions</li>
+<li>Priority support (12hr SLA)</li>
+<li><strong>2 free research reports/month</strong></li>
+<li>20% discount on additional reports</li>
+</ul></div>
+</div>
+
+<h3>Research Concierge Pricing</h3>
+<table class="tbl">
+<thead><tr><th>Report Type</th><th>Price (Pay-per-report)</th><th>Delivery</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><strong>Concall Analysis</strong></td><td>₹499</td><td>12 hours</td><td>Latest earnings call: key takeaways, management tone, guidance vs actual, red flags</td></tr>
+<tr><td><strong>Management Walk the Talk</strong></td><td>₹799</td><td>24 hours</td><td>3-year promise vs delivery audit. Credibility score. Past guidance accuracy.</td></tr>
+<tr><td><strong>Forensic Financial Analysis</strong></td><td>₹999</td><td>24 hours</td><td>Beneish M-Score, Altman Z-Score, Piotroski F-Score, receivables, cash quality</td></tr>
+<tr><td><strong>Valuation Analysis</strong></td><td>₹999</td><td>24 hours</td><td>Reverse DCF, implied growth rate, bull/base/bear scenarios, peer comparison</td></tr>
+<tr><td><strong>Comprehensive Research Report</strong></td><td>₹1,999</td><td>48 hours</td><td>Full institutional-grade report. Business + financials + management + valuation + verdict</td></tr>
+<tr><td><strong>Research Bundle (any 3)</strong></td><td>₹2,499</td><td>Per report SLA</td><td>Any 3 reports for one stock at 20% discount</td></tr>
+</tbody></table>
+<p style="font-size:.83rem;color:var(--tm)">All reports permanently saved to user's Report Vault. Shareable link (24-hr expiry). Downloadable PDF. Research revenue has ~70% gross margin after AI compute and QA costs.</p>
+
+<h3>Revenue Streams Summary</h3>
+<table class="tbl">
+<thead><tr><th>Stream</th><th>Model</th><th>Phase</th><th>Target Margin</th></tr></thead>
+<tbody>
+<tr><td>Subscriptions (Pro/Elite)</td><td>Monthly/Annual SaaS</td><td>Phase 0+</td><td>98%</td></tr>
+<tr><td>Research Reports</td><td>Pay-per-report + bundles</td><td>Phase 2+</td><td>~70%</td></tr>
+<tr><td>Product Marketplace</td><td>Flat referral fees</td><td>Phase 5</td><td>~60%</td></tr>
+<tr><td>B2B (CA/advisor white-label)</td><td>₹999/mo per CA (10 clients)</td><td>Phase 3+</td><td>95%</td></tr>
+</tbody></table>
+
+<h3>Upgrade Trigger Design</h3>
+<p>Paywall moments must feel helpful, not hostile. Show the locked feature with a clear "what you'd see" preview:</p>
+<ul>
+<li><strong>4th asset class:</strong> "You're trying to add NPS. Pro unlocks all 9 asset classes — see your complete picture. ₹149/month."</li>
+<li><strong>Benchmark chart (free):</strong> Show blurred chart with "Pro shows how you compare to Nifty500 — unlock for ₹149/month."</li>
+<li><strong>Tax cockpit:</strong> Show total LTCG exposure but blur harvesting suggestions: "You can save ₹X in tax. Upgrade to see how."</li>
+<li><strong>AI insights tab:</strong> Show 1 insight (teaser), lock remaining: "2 more insights this week — available on Pro."</li>
+<li><strong>Goal gap alert:</strong> "You are ₹82L short of your Retirement goal. Pro shows your personalised SIP plan to close the gap."</li>
+<li><strong>Research Vault:</strong> Show research report previews (blurred). "Full report: ₹499. Permanently yours."</li>
+</ul>
+
+<!-- S25: KPIs -->
+<h2 id="s25"><span class="snum">25</span> KPIs &amp; Success Metrics</h2>
+<div class="callout cv"><h4>North Star Metric</h4><p><strong>% of user's total investable wealth tracked on Artha.</strong> Target: &gt;80% within 30 days of signup. This directly measures our core value prop. If users only add MF and ignore EPF/PMS, we haven't solved the problem.</p></div>
+<table class="tbl">
+<thead><tr><th>Category</th><th>Metric</th><th>Target</th><th>Measurement</th></tr></thead>
+<tbody>
+<tr><td>Engagement</td><td>DAU / MAU ratio</td><td>&gt;30%</td><td>Supabase auth events</td></tr>
+<tr><td>Engagement</td><td>Average session duration</td><td>&gt;4 minutes</td><td>Frontend analytics (Posthog)</td></tr>
+<tr><td>Engagement</td><td>% users reading AI commentary</td><td>&gt;60%</td><td>ai_insights.is_read tracking</td></tr>
+<tr><td>Activation</td><td>Time to first XIRR displayed</td><td>&lt;5 min (P50)</td><td>Timestamp from signup to first XIRR API call</td></tr>
+<tr><td>Activation</td><td>% users adding 2+ asset classes in first session</td><td>&gt;40%</td><td>Holdings events</td></tr>
+<tr><td>Conversion</td><td>Free → Pro within 30 days</td><td>&gt;10%</td><td>Subscription creation events</td></tr>
+<tr><td>Retention</td><td>Monthly Pro churn</td><td>&lt;3%</td><td>Subscription cancellation events</td></tr>
+<tr><td>Retention</td><td>Day-7 retention (any activity)</td><td>&gt;50%</td><td>Login events</td></tr>
+<tr><td>Business</td><td>Net Promoter Score</td><td>&gt;60</td><td>In-app survey (quarterly)</td></tr>
+<tr><td>Business</td><td>LTV:CAC ratio</td><td>&gt;7x</td><td>Revenue tracking vs acquisition costs</td></tr>
+<tr><td>Data Quality</td><td>XIRR computation success rate</td><td>&gt;99%</td><td>API error rate monitoring</td></tr>
+<tr><td>Data Quality</td><td>MF NAV staleness (&lt;24hr)</td><td>&gt;99.5% of trading days</td><td>Cron job success rate</td></tr>
+</tbody></table>
+
+<!-- S26: GTM -->
+<h2 id="s26"><span class="snum">26</span> Go-to-Market Strategy</h2>
+<h3>Phase 0 — Seed Launch (0→500 users, Month 1–2)</h3>
+<ul>
+<li><strong>ProductHunt:</strong> Target top 5 Products of the Day. Best day: Tuesday–Thursday. Prep 2 weeks ahead: hunter, assets, launch text.</li>
+<li><strong>Reddit:</strong> r/IndiaInvestments, r/personalfinanceindia, r/fatFIREindia. Lead with data: "I computed my ULIP's true return after all charges — here's what I found." Not a promotion post.</li>
+<li><strong>Twitter/X:</strong> Thread: "Most Indians have no idea what their PMS is actually earning. Here's how to find out." Link to free tool.</li>
+<li><strong>LinkedIn:</strong> Post from founder: "We built the only tool that shows your PMS fee drain vs alpha." Target HNI/finance professionals.</li>
+<li><strong>Personal network:</strong> Direct outreach to CAs, wealth managers, PMS investors. Offer 3-month Pro free for honest feedback.</li>
+</ul>
+<h3>Phase 1 — Growth (500→5,000 users, Month 3–8)</h3>
+<ul>
+<li><strong>SEO content:</strong> "XIRR calculator India" (3,600/mo search), "is my PMS worth it" (1,200/mo), "ULIP true returns calculator" (800/mo), "net worth tracker India" (6,000/mo).</li>
+<li><strong>YouTube + Twitter:</strong> "PMS Truth Series" — compute real XIRR of 10 popular PMS strategies. Viral potential in HNI community.</li>
+<li><strong>CA partnerships:</strong> Artha quarterly PDF report = CA's professional report for clients. Offer white-label to CAs for ₹999/month (serves 10 clients). Revenue + distribution.</li>
+<li><strong>FIRE India community:</strong> Partner with 3 FIRE bloggers/influencers for genuine reviews. These users have exactly the diverse portfolios Artha serves.</li>
+</ul>
+<h3>Phase 2 — Scale (5,000→50,000 users, Month 9–18)</h3>
+<ul>
+<li>Account Aggregator as growth hook: "Connect all accounts in 30 seconds"</li>
+<li>PMS provider partnerships: PMS managers recommend Artha to clients for independent performance tracking</li>
+<li>Corporate employee benefits: companies offer Artha as financial wellness benefit</li>
+<li>Insurance broker network: ULIP Honesty Score creates viral sharing ("look what my ULIP is really returning")</li>
+</ul>
+
+<!-- S27: FINANCIAL MODEL -->
+<h2 id="s27"><span class="snum">27</span> Financial Model</h2>
+<table class="tbl">
+<thead><tr><th>Item</th><th>Month 3</th><th>Month 6</th><th>Month 12</th><th>Month 24</th></tr></thead>
+<tbody>
+<tr><td><strong>Free Users</strong></td><td>500</td><td>3,000</td><td>10,000</td><td>50,000</td></tr>
+<tr><td>Pro Subscribers</td><td>50</td><td>300</td><td>1,000</td><td>5,000</td></tr>
+<tr><td>Elite Subscribers</td><td>5</td><td>30</td><td>100</td><td>500</td></tr>
+<tr><td>Research Reports (units/mo)</td><td>0</td><td>50</td><td>300</td><td>2,000</td></tr>
+<tr><td><strong>Subscription Revenue</strong></td><td>₹8,950</td><td>₹53,700</td><td>₹1,79,000</td><td>₹8,95,000</td></tr>
+<tr><td><strong>Research Revenue</strong></td><td>₹0</td><td>₹37,500</td><td>₹2,25,000</td><td>₹15,00,000</td></tr>
+<tr><td><strong>Total Monthly Revenue</strong></td><td>₹8,950</td><td>₹91,200</td><td>₹4,04,000</td><td>₹23,95,000</td></tr>
+<tr><td><strong>ARR</strong></td><td>₹10.7L</td><td>₹1.09 Cr</td><td>₹4.85 Cr</td><td>₹28.7 Cr</td></tr>
+<tr><td>Infrastructure Cost</td><td>₹3,000</td><td>₹8,000</td><td>₹25,000</td><td>₹1,20,000</td></tr>
+<tr><td>AI API (commentary + research)</td><td>₹500</td><td>₹8,000</td><td>₹45,000</td><td>₹2,50,000</td></tr>
+<tr><td>Research QA + human review</td><td>₹0</td><td>₹10,000</td><td>₹40,000</td><td>₹2,00,000</td></tr>
+<tr><td>Resend Email</td><td>₹0</td><td>₹500</td><td>₹2,000</td><td>₹8,000</td></tr>
+<tr><td>Razorpay fees (2%)</td><td>₹180</td><td>₹1,824</td><td>₹8,080</td><td>₹47,900</td></tr>
+<tr><td><strong>Blended Gross Margin</strong></td><td>96%</td><td>91%</td><td>88%</td><td>85%</td></tr>
+</tbody></table>
+<p style="font-size:.83rem;color:var(--tm)">Assumptions: Research avg ticket ₹750/report. Research gross margin ~70% after AI compute + QA. Subscriptions remain 98% margin. Blended margin dilutes as research scales. Research revenue unlocks from Month 6 (Phase 2 launch). Month 24 assumes Research Concierge is a significant standalone revenue driver.</p>
+
+<!-- S28: RISKS -->
+<h2 id="s28"><span class="snum">28</span> Risks &amp; Mitigation</h2>
+<table class="tbl">
+<thead><tr><th>Risk</th><th>Prob</th><th>Impact</th><th>Mitigation</th></tr></thead>
+<tbody>
+<tr><td><strong>INDmoney adds PMS/ULIP tracking</strong></td><td>High</td><td>Medium</td><td>Speed to market + data lock-in. Our ULIP Honesty Score and PMS Verdict are deeper analytical features that take 6–9 months to replicate properly. AI commentary depth is harder to copy than features.</td></tr>
+<tr><td><strong>SEBI regulations on financial analytics</strong></td><td>Medium</td><td>High</td><td>Strictly analytics, not advisory. No recommendations. Prominent "not investment advice" disclaimer. Monitor SEBI consultation papers. SEBI RIA for advisory is Phase 5 optional.</td></tr>
+<tr><td><strong>User trust — sharing financial data</strong></td><td>Medium</td><td>High</td><td>No EPFO/bank credential storage. PDF-only import. Clear privacy policy. Third-party security audit before public launch. SOC 2 roadmap.</td></tr>
+<tr><td><strong>yfinance API instability</strong></td><td>Medium</td><td>Medium</td><td>Cache prices aggressively (15-min). Multiple fallback sources (NSE unofficial API, Google Finance scrape). Show cached price with timestamp if API fails.</td></tr>
+<tr><td><strong>Low free→paid conversion (&lt;5%)</strong></td><td>Medium</td><td>High</td><td>Free tier hard limit at 3 asset classes. Multiple compelling upgrade triggers. Tax cockpit ROI is strongest conversion lever — show exactly how much tax savings are being missed.</td></tr>
+<tr><td><strong>AMFI NAV file format changes</strong></td><td>Low</td><td>Medium</td><td>AMFI file format has been stable for 10+ years. Monitor file structure in cron. Alert on parse errors. Fallback: scrape individual AMC sites.</td></tr>
+<tr><td><strong>Account Aggregator ecosystem immaturity</strong></td><td>Medium</td><td>Low</td><td>AA is Phase 3 (Month 5–8) — not MVP-critical. PDF parsing covers 80% of use cases. AA is enhancement, not foundation.</td></tr>
+<tr><td><strong>Slow user growth</strong></td><td>Medium</td><td>High</td><td>Content-led SEO from Month 1. ULIP/PMS truth content = inherently viral in HNI community. Low CAC target (&lt;₹500) means growth is profitable even at slow pace.</td></tr>
+</tbody></table>
+
+<hr>
+<div class="callout cs"><h4>Document Status: v3.0 — Vision Expanded · MVP Build-Ready</h4><p>v3.0 expands the product from a wealth tracker to a full Personal Finance OS + Investment Research Concierge. All Phase 0 features remain fully specified. New sections: Brokerage Import (MVP), Goal Planning, and Research Concierge added. Ready to build.</p></div>
+<p style="text-align:center;color:var(--tl);font-size:.78rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--b)">Artha PRD v3.0 Full Detail — Confidential — Prepared by Medha Trivedi, June 2026<br>Not for distribution. Contains proprietary product strategy.</p>
+</div></div>
+</body></html>

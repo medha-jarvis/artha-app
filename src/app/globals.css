@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .gain { color: #059669; }
+  .loss { color: #dc2626; }
+}

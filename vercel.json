@@ -1,0 +1,22 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/nav",
+      "schedule": "30 12 * * 1-5"
+    },
+    {
+      "path": "/api/cron/stocks",
+      "schedule": "5 10 * * 1-5"
+    },
+    {
+      "path": "/api/cron/ai",
+      "schedule": "30 13 * * 0"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/prd/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
+  ]
+}
