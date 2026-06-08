@@ -127,7 +127,10 @@ export default function GoalsPage() {
     }
     setSaving(true)
     setError(null)
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) { setError('Not logged in. Please refresh and try again.'); setSaving(false); return }
     const { error } = await supabase.from('goals').insert({
+      user_id: user.id,
       name: form.name.trim(),
       icon: form.icon,
       target_corpus: Number(form.target_corpus),
