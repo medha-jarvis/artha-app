@@ -10,6 +10,7 @@ const NAV = [
   { href: '/dashboard/goals', label: 'Goals', icon: '🎯' },
   { href: '/dashboard/tax', label: 'Tax', icon: '🧾' },
   { href: '/dashboard/research', label: 'Research', icon: '🔬' },
+  { href: '/dashboard/settings', label: 'Settings', icon: '⚙️' },
 ]
 
 const BOTTOM_NAV = NAV.slice(0, 5)
