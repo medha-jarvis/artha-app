@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { formatCurrency, formatPercent } from '@/lib/utils'
 import { ASSET_CLASSES } from '@/lib/types'
 import Link from 'next/link'
@@ -160,6 +161,7 @@ function DeleteModal({ row, onConfirm, onClose, deleting }: {
 }
 
 export default function PortfolioPage() {
+  const router = useRouter()
   const [rows, setRows] = useState<DisplayRow[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
@@ -170,6 +172,8 @@ export default function PortfolioPage() {
   const [editRow, setEditRow] = useState<DisplayRow | null>(null)
   const [deleteRow, setDeleteRow] = useState<DisplayRow | null>(null)
   const [deleting, setDeleting] = useState(false)
+  const tableCardRef = useRef<HTMLDivElement>(null)
+  const [isSticky, setIsSticky] = useState(false)
 
   const loadPortfolio = useCallback(async (isRefresh = false) => {
     if (isRefresh) setRefreshing(true)
@@ -281,6 +285,26 @@ export default function PortfolioPage() {
   }, [])
 
   useEffect(() => { loadPortfolio() }, [loadPortfolio])
+
+  useEffect(() => {
+    if (loading) return
+    const el = tableCardRef.current
+    if (!el) return
+    const update = () => {
+      const rect = el.getBoundingClientRect()
+      setIsSticky(rect.top < 0 && rect.bottom > 80)
+    }
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [loading])
+
+  const navigateToRow = (row: DisplayRow) => {
+    if (row.asset_class === 'stocks' && row.symbol) {
+      router.push(`/dashboard/portfolio/stock/${row.symbol}`)
+    } else if (row.holding_id) {
+      router.push(`/dashboard/portfolio/holding/${row.holding_id}`)
+    }
+  }
 
   const handleEdit = async (form: EditForm) => {
     if (!editRow?.holding_id) return
@@ -407,7 +431,7 @@ export default function PortfolioPage() {
         </div>
       )}
 
-      <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-5">
+      <div ref={tableCardRef} className="bg-white border border-slate-200 rounded-xl p-4 md:p-5">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
           <div className="flex gap-2 overflow-x-auto pb-0.5">
             <button onClick={() => setFilter('all')}
@@ -476,19 +500,23 @@ export default function PortfolioPage() {
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-slate-400 text-xs border-b border-slate-100">
-                <th className="text-left py-2 font-medium">Holding</th>
-                <th className="text-left py-2 font-medium">Type</th>
-                <th className="text-right py-2 font-medium">Invested</th>
-                <th className="text-right py-2 font-medium">Current Value</th>
-                <th className="text-right py-2 font-medium">Gain / Loss</th>
-                <th className="text-right py-2 font-medium">Return</th>
-                <th className="text-right py-2 font-medium">Actions</th>
+              <tr className={`text-slate-400 text-xs transition-colors duration-300 ${isSticky ? 'border-b-2 border-slate-200' : 'border-b border-slate-100'}`}>
+                <th className={`sticky top-0 z-10 text-left py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Holding</th>
+                <th className={`sticky top-0 z-10 text-left py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Type</th>
+                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Invested</th>
+                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Current Value</th>
+                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Gain / Loss</th>
+                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Return</th>
+                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {sorted.map(row => (
-                <tr key={row.key} className="border-b border-slate-50 hover:bg-slate-50 transition group">
+                <tr
+                  key={row.key}
+                  onClick={() => navigateToRow(row)}
+                  className="border-b border-slate-50 hover:bg-indigo-50/40 transition group cursor-pointer"
+                >
                   <td className="py-2.5">
                     <div className="flex items-center gap-2">
                       <span>{row.asset_icon}</span>
@@ -525,14 +553,14 @@ export default function PortfolioPage() {
                   <td className="py-2.5 text-right">
                     <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition">
                       {row.holding_id && (
-                        <button onClick={() => setEditRow(row)}
+                        <button onClick={(e) => { e.stopPropagation(); setEditRow(row) }}
                           className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded transition" title="Edit">
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                           </svg>
                         </button>
                       )}
-                      <button onClick={() => setDeleteRow(row)}
+                      <button onClick={(e) => { e.stopPropagation(); setDeleteRow(row) }}
                         className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded transition" title="Delete">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

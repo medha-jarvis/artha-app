@@ -60,7 +60,7 @@ export default function DashboardPage() {
           .then(r => r),
       ])
 
-      if (snaps && !snaps.error) setSnapshots(snaps as unknown as Snapshot[])
+      if (snaps && Array.isArray(snaps)) setSnapshots(snaps as unknown as Snapshot[])
 
       if (!holdings || holdings.length === 0) {
         // Check if there are stock transactions (stocks don't create holdings records)
