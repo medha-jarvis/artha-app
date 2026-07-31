@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { formatCurrency, formatPercent, formatDate } from '@/lib/utils'
@@ -112,8 +113,8 @@ function deSignal(de: number | null): 'good' | 'warn' | 'bad' | undefined {
   return 'bad'
 }
 
-export default function StockDetailPage({ params }: { params: Promise<{ symbol: string }> }) {
-  const { symbol } = use(params)
+export default function StockDetailPage() {
+  const { symbol } = useParams<{ symbol: string }>()
   const [detail, setDetail] = useState<StockDetail | null>(null)
   const [position, setPosition] = useState<Position | null>(null)
   const [txs, setTxs] = useState<Tx[]>([])

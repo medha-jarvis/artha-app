@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { formatCurrency, formatPercent } from '@/lib/utils'
@@ -31,8 +32,8 @@ function MetaRow({ label, value }: { label: string; value: string | number | und
   )
 }
 
-export default function HoldingDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function HoldingDetailPage() {
+  const { id } = useParams<{ id: string }>()
   const [holding, setHolding] = useState<Holding | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')

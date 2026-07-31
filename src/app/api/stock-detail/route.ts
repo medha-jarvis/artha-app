@@ -13,12 +13,12 @@ export async function GET(req: NextRequest) {
   try {
     const [quoteRes, summaryRes] = await Promise.all([
       fetch(
-        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${nseSym}`,
-        { headers, next: { revalidate: 300 } }
+        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(nseSym)}`,
+        { headers, cache: 'no-store' }
       ),
       fetch(
         `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${nseSym}?modules=summaryDetail,financialData,defaultKeyStatistics,price`,
-        { headers, next: { revalidate: 900 } }
+        { headers, cache: 'no-store' }
       ),
     ])
 

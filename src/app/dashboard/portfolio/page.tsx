@@ -173,7 +173,10 @@ export default function PortfolioPage() {
   const [deleteRow, setDeleteRow] = useState<DisplayRow | null>(null)
   const [deleting, setDeleting] = useState(false)
   const tableCardRef = useRef<HTMLDivElement>(null)
-  const [isSticky, setIsSticky] = useState(false)
+  const tableScrollRef = useRef<HTMLDivElement>(null)
+  const stickyBarRef = useRef<HTMLDivElement>(null)
+  const [stickyActive, setStickyActive] = useState(false)
+  const [colWidths, setColWidths] = useState<number[]>([])
 
   const loadPortfolio = useCallback(async (isRefresh = false) => {
     if (isRefresh) setRefreshing(true)
@@ -287,16 +290,45 @@ export default function PortfolioPage() {
   useEffect(() => { loadPortfolio() }, [loadPortfolio])
 
   useEffect(() => {
-    if (loading) return
-    const el = tableCardRef.current
-    if (!el) return
-    const update = () => {
-      const rect = el.getBoundingClientRect()
-      setIsSticky(rect.top < 0 && rect.bottom > 80)
+    if (loading || rows.length === 0) return
+    const card = tableCardRef.current
+    const scroll = tableScrollRef.current
+    const sticky = stickyBarRef.current
+    if (!card || !scroll) return
+
+    // Read actual column widths from the rendered <th> elements
+    const readWidths = () => {
+      const ths = scroll.querySelectorAll('thead th')
+      setColWidths(Array.from(ths).map(th => (th as HTMLElement).getBoundingClientRect().width))
     }
+
+    const update = () => {
+      const rect = card.getBoundingClientRect()
+      const scrollRect = scroll.getBoundingClientRect()
+      const active = rect.top < 0 && rect.bottom > 60
+      setStickyActive(active)
+      if (active) readWidths()
+      // Keep sticky bar left-aligned with the table scroll area
+      if (sticky) {
+        sticky.style.left = `${scrollRect.left}px`
+        sticky.style.width = `${scrollRect.width}px`
+      }
+    }
+
+    const syncScroll = () => {
+      if (sticky) sticky.scrollLeft = scroll.scrollLeft
+    }
+
     window.addEventListener('scroll', update, { passive: true })
-    return () => window.removeEventListener('scroll', update)
-  }, [loading])
+    window.addEventListener('resize', update, { passive: true })
+    scroll.addEventListener('scroll', syncScroll, { passive: true })
+    update()
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+      scroll.removeEventListener('scroll', syncScroll)
+    }
+  }, [loading, rows.length])
 
   const navigateToRow = (row: DisplayRow) => {
     if (row.asset_class === 'stocks' && row.symbol) {
@@ -497,17 +529,45 @@ export default function PortfolioPage() {
         </div>
 
         {/* Desktop table */}
-        <div className="hidden md:block overflow-x-auto">
+        {/* Sticky header overlay — fixed position, appears when table header scrolls off screen */}
+        <div
+          ref={stickyBarRef}
+          className="hidden md:block fixed top-0 z-50 overflow-x-hidden bg-white border-b-2 border-indigo-100 shadow-sm"
+          style={{
+            opacity: stickyActive ? 1 : 0,
+            transform: stickyActive ? 'translateY(0)' : 'translateY(-8px)',
+            transition: 'opacity 0.2s ease, transform 0.2s ease',
+            pointerEvents: stickyActive ? 'auto' : 'none',
+          }}
+        >
+          <table className="text-sm border-collapse" style={{ width: colWidths.reduce((a, b) => a + b, 0) || '100%' }}>
+            <thead>
+              <tr className="text-slate-500 text-xs">
+                {['Holding', 'Type', 'Invested', 'Current Value', 'Gain / Loss', 'Return', 'Actions'].map((label, i) => (
+                  <th
+                    key={label}
+                    style={{ width: colWidths[i] ?? 'auto', minWidth: colWidths[i] ?? 'auto' }}
+                    className={`py-2.5 font-semibold bg-white ${i > 1 ? 'text-right' : 'text-left'}`}
+                  >
+                    {label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div ref={tableScrollRef} className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className={`text-slate-400 text-xs transition-colors duration-300 ${isSticky ? 'border-b-2 border-slate-200' : 'border-b border-slate-100'}`}>
-                <th className={`sticky top-0 z-10 text-left py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Holding</th>
-                <th className={`sticky top-0 z-10 text-left py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Type</th>
-                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Invested</th>
-                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Current Value</th>
-                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Gain / Loss</th>
-                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Return</th>
-                <th className={`sticky top-0 z-10 text-right py-2.5 font-medium transition-colors duration-300 ${isSticky ? 'bg-slate-50' : 'bg-white'}`}>Actions</th>
+              <tr className="text-slate-400 text-xs border-b border-slate-100">
+                <th className="text-left py-2.5 font-medium">Holding</th>
+                <th className="text-left py-2.5 font-medium">Type</th>
+                <th className="text-right py-2.5 font-medium">Invested</th>
+                <th className="text-right py-2.5 font-medium">Current Value</th>
+                <th className="text-right py-2.5 font-medium">Gain / Loss</th>
+                <th className="text-right py-2.5 font-medium">Return</th>
+                <th className="text-right py-2.5 font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
