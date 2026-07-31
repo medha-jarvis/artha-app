@@ -108,8 +108,9 @@ function roeSignal(roe: number | null): 'good' | 'warn' | 'bad' | undefined {
 
 function deSignal(de: number | null): 'good' | 'warn' | 'bad' | undefined {
   if (!de) return undefined
-  if (de < 0.5) return 'good'
-  if (de < 1.5) return 'warn'
+  // yfinance returns D/E * 100 (e.g. 50 = 0.5x D/E ratio)
+  if (de < 50) return 'good'
+  if (de < 150) return 'warn'
   return 'bad'
 }
 
@@ -299,7 +300,7 @@ export default function StockDetailPage() {
             <MetricCell label="P/B" value={detail.pb ? detail.pb.toFixed(2) + 'x' : null} />
             <MetricCell label="EPS (TTM)" value={detail.eps_ttm ? `₹${detail.eps_ttm.toFixed(2)}` : null} />
             <MetricCell label="EPS (Fwd)" value={detail.eps_forward ? `₹${detail.eps_forward.toFixed(2)}` : null} />
-            <MetricCell label="Div Yield" value={detail.dividend_yield ? `${(detail.dividend_yield * 100).toFixed(2)}%` : null} />
+            <MetricCell label="Div Yield" value={detail.dividend_yield ? `${detail.dividend_yield.toFixed(2)}%` : null} />
             <MetricCell label="Beta" value={detail.beta ? detail.beta.toFixed(2) : null} />
           </div>
         </div>
@@ -322,7 +323,7 @@ export default function StockDetailPage() {
             <MetricCell label="Gross Margin" value={detail.gross_margin ? `${(detail.gross_margin * 100).toFixed(1)}%` : null} />
             <MetricCell label="Op Margin" value={detail.operating_margin ? `${(detail.operating_margin * 100).toFixed(1)}%` : null} />
             <MetricCell label="Net Margin" value={detail.profit_margin ? `${(detail.profit_margin * 100).toFixed(1)}%` : null} />
-            <MetricCell label="D/E Ratio" value={detail.debt_to_equity ? detail.debt_to_equity.toFixed(2) + 'x' : null} highlight={deSignal(detail.debt_to_equity)} />
+            <MetricCell label="D/E Ratio" value={detail.debt_to_equity != null ? (detail.debt_to_equity / 100).toFixed(2) + 'x' : null} highlight={deSignal(detail.debt_to_equity)} />
             <MetricCell label="Current Ratio" value={detail.current_ratio ? detail.current_ratio.toFixed(2) + 'x' : null} />
             <MetricCell label="Free Cash Flow"
               value={detail.free_cash_flow
